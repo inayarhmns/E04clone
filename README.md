@@ -1,62 +1,73 @@
-# Template Proyek Django PBP
+# Proyek UTS Kelompok E04: Irama Kain
 
 Pemrograman Berbasis Platform (CSGE602022) - diselenggarakan oleh Fakultas Ilmu Komputer Universitas Indonesia, Semester Ganjil 2022/2023
 
-*Read this in other languages: [Indonesian](README.md), [English](README.en.md)*
+## Anggota Kelompok
+1. Carissa Almira Yudiva (2106751676)
+2. Steven Yosua Saputra (2106750780)
+3. Muhammad Nafriel Ramadhan (2106635663)
+4. Inaya Rahmanisa (2106708330) 
+5. Hikam Fajduani (2106634250)
 
-## Pendahuluan
+[App Link](https://iramakain.herokuapp.com/)
 
-Repositori ini merupakan sebuah template yang dirancang untuk membantu mahasiswa yang sedang mengambil mata kuliah Pemrograman Berbasis Platform (CSGE602022) mengetahui struktur sebuah proyek aplikasi Django serta file dan konfigurasi yang penting dalam berjalannya aplikasi. Kamu dapat dengan bebas menyalin isi dari repositori ini atau memanfaatkan repositori ini sebagai pembelajaran sekaligus awalan dalam membuat sebuah proyek Django.
+## About
+### Our Focus: Clothes Donation & Reworked (Sustainability)
 
-## Cara Menggunakan
+Melesatnya perkembangan fashion industry pada zaman sekarang berbanding lurus dengan tercemarnya lingkungan. Sisa pakaian yang sudah tidak terpakai oleh konsumen akan menumpuk menjadi fashion waste. Tak hanya itu, Sisa kain yang digunakan untuk membuat pakaian di pabrik-pabrik berskala kecil hingga besar, juga menimbulkan penumpukan fabric waste. Bahkan, proses pembakaran dari produksi pakaian di dunia pun melepaskan 1,2 miliar ton karbon dioksida dan memperparah efek rumah kaca. Alasan ini menggerakkan kami untuk membuat platform dengan nama Irama Kain yang menerima segala macam fashion waste, seperti pakaian bekas dan sisa kain untuk berkontribusi dalam kegiatan G20. Irama Kain mendaur ulang fashion waste menjadi pakaian baru yang layak pakai dan akan dijual kembali, yang nantinya, hasil dari penjualan tersebut akan kami donasikan juga kepada masyarakat. #DariKamuUntukMereka.
 
-Apabila kamu ingin menggunakan repositori ini sebagai repositori awalan yang nantinya akan kamu modifikasi:
+## Modul
+1. Homepage (Kelompok E04)
+2. Authentication Login (Sign In, Login, Logout): (Steven)
+    - Login:
+      - Email
+      - Password
+    - Sign Up (AJAX):
+      - Nama
+      - Jenis Kelamin
+      - Email
+      - Password
+      - Kontak Yang Dapat Dihubungi
+      - Alamat
+3. Profile Page: (Kelompok E04)
+   - Lihat Profil
+   - Edit Profil
+4. FAQ (AJAX): (Carissa)
+   - Form Pernyataan
+   - Daftar FAQ
+5. Buat Donasi (AJAX): (Inaya)
+   - Form Data Donasi
+   - History/Status Donasi
+6. Marketplace: (Nafriel)
+   - Catalog
+   - Cart (AJAX)
+7. Partnership/Customer Service Contact (AJAX): (Hikam)
+   - Form Partnership 
+   - Tampilan Status
 
-1. Buka laman GitHub repositori templat kode, lalu klik tombol "**Use this template**"
-   untuk membuat salinan repositori ke dalam akun GitHub milikmu.
-2. Buka laman GitHub repositori yang dibuat dari templat, lalu gunakan perintah
-   `git clone` untuk menyalin repositorinya ke suatu lokasi di dalam sistem
-   berkas (_filesystem_) komputermu:
+## Role Pengguna
+### Guest User
+Guest user memiliki akses untuk melihat katalog Marketplace dan Homepage tanpa melakukan login. Halaman yang bisa diakses diantaranya:
+- Katalog Marketplace
+- Homepage
+- Authentication Sign In
+- FAQ
+- Contact (Partnership/Customer Service)
 
-   ```shell
-   git clone <URL ke repositori di GitHub> <path ke suatu lokasi di filesystem>
-   ```
-3. Masuk ke dalam repositori yang sudah di-_clone_ dan jalankan perintah berikut
-   untuk menyalakan _virtual environment_:
+### Logged In User
+Logged in user memiliki akses untuk melakukan donasi baju dan membeli baju reworked dari katalog Marketplace. Halaman yang bisa diakses diantaranya:
+- Authentication (Login, Logout)
+- Homepage 
+- FAQ (Menambahkan Pertanyaan)
+- Donation Form and Details (Melakukan donasi  mendapatkan poin)
+- Marketplace (Melakukan pembelian)
+- Contact (Partnership/Customer Service)
 
-   ```shell
-   python -m venv env
-   ```
-4. Nyalakan environment dengan perintah berikut:
+### Admin
+- Authentication (Login, Logout)
+- Homepage 
+- FAQ (Menjawab Pertanyaan)
+- Marketplace
+- Contact (Partnership/Customer Service) -> mengubah status
 
-   ```shell
-   # Windows
-   .\env\Scripts\activate
-   # Linux/Unix, e.g. Ubuntu, MacOS
-   source env/bin/activate
-   ```
-5. Install dependencies yang dibutuhkan untuk menjalankan aplikasi dengan perintah berikut:
-
-   ```shell
-   pip install -r requirements.txt
-   ```
-
-6. Jalankan aplikasi Django menggunakan server pengembangan yang berjalan secara
-   lokal:
-
-   ```shell
-   python manage.py runserver
-   ```
-7. Bukalah `http://localhost:8000` pada browser favoritmu untuk melihat apakah aplikasi sudah berjalan dengan benar.
-
-## Contoh Deployment 
-
-Pada template ini, deployment dilakukan dengan memanfaatkan GitHub Actions sebagai _runner_ dan Heroku sebagai platform Hosting aplikasi. 
-
-Untuk melakukan deployment, kamu dapat melihat instruksi yang ada pada [Tutorial 0](https://pbp-fasilkom-ui.github.io/ganjil-2023/assignments/tutorial/tutorial-0).
-
-Untuk contoh aplikasi Django yang sudah di deploy, dapat kamu akses di [https://django-pbp-template.herokuapp.com/](https://django-pbp-template.herokuapp.com/)
-
-## Credits
-
-Template ini dibuat berdasarkan [PBP Ganjil 2021](https://gitlab.com/PBP-2021/pbp-lab) yang ditulis oleh Tim Pengajar Pemrograman Berbasis Platform 2021 ([@prakashdivyy](https://gitlab.com/prakashdivyy)) dan [django-template-heroku](https://github.com/laymonage/django-template-heroku) yang ditulis oleh [@laymonage, et al.](https://github.com/laymonage). Template ini dirancang sedemikian rupa sehingga mahasiswa dapat menjadikan template ini sebagai awalan serta acuan dalam mengerjakan tugas maupun dalam berkarya.
+## Thank You!
