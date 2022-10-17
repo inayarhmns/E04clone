@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     'example_app',
     'Home',
     'faq',
+    'profilePage',
+    'donation',
+
 ]
 
 MIDDLEWARE = [
