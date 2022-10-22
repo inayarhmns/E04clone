@@ -19,6 +19,10 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('Home.urls')), #(Steven) gw ngeubah yang tadinya default ke example jadi ke home
+    path('Authentication/', include('Authentication.urls')), 
+    path('faq/', include('faq.urls')),
+    path('profile/', include('profilePage.urls')),
+    path('donation/', include('donation.urls')),
 ]
 
 # TODO: Implement Routings Here

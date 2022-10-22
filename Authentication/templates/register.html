@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block meta %}
+<title>Authentication</title>
+{% endblock meta %}
+
+{% block content %}
+<form method = "POST">
+    {% csrf_token %}
+    {{auth.as_table}}
+    {{non_auth.as_table}}
+    <input type = 'submit' id = 'submit_button' value = 'submit'>
+</form>
+{% endblock content %}
