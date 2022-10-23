@@ -5,10 +5,37 @@
 {% endblock meta %}
 
 {% block content %}
-<form method = "POST">
-    {% csrf_token %}
+<script>
+    $(document).ready(function(){
+        $('#button1').click(function(){
+            var temp2 = '{{status}}'
+            var temp = "{% url 'Authentication:register-user' 1 %}".replace('1', temp2)
+            $.ajax({
+                url: temp,
+                type: "POST",
+                data: {
+                    'csrfmiddlewaretoken': "{{ csrf_token }}",
+                    'username': $('#id_username').val(),
+                    'first_name': $('#id_first_name').val(),
+                    'last_name': $('#id_last_name').val(),
+                    'email':$('#id_email').val(),
+                    'password':$('#id_password').val(),
+                    'password2':$('#id_password2').val(),
+                    'jenis_kelamin':$('#id_jenis_kelamin').val(),
+                    'kontak':$('#id_kontak').val(),
+                    'alamat':$('#id_alamat').val()
+                },
+                success: function(data){
+                    alert(data)
+                }
+            });
+        });
+    });
+</script>
+
+<table>
     {{auth.as_table}}
     {{non_auth.as_table}}
-    <input type = 'submit' id = 'submit_button' value = 'submit'>
-</form>
+</table>
+<button type = "button" id = 'button1'>Submit</button>
 {% endblock content %}

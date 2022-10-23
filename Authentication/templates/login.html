@@ -5,10 +5,28 @@
 {% endblock meta %}
 
 {% block content %}
-<form method = "POST">
-    {% csrf_token %}
-    {{auth.as_table}}
-    {{non_auth.as_table}}
-    <input type = 'submit' id = 'submit_button' value = 'submit'>
-</form>
+<script>
+    $(document).ready(function(){
+        var temp = "{% url 'Authentication:login-user' 1 %}"
+        temp.replace('1', '{{status}}')
+        $('#button').click(function(){
+            $.ajax({
+                url: temp,
+                type: 'POST',
+                data: {
+                    'email': $('#id_email').val(),
+                    'password': $('#id_password').val()
+                },
+                success: function(data){
+                    alert(data);
+                }
+            });
+        });
+    });
+</script>
+
+<table>
+    <tr>{{auth.as_table}}</tr>
+</table>
+<button type = 'button' id = 'submit_button'>Submit</button>
 {% endblock content %}
