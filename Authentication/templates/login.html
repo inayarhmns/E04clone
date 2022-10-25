@@ -7,13 +7,14 @@
 {% block content %}
 <script>
     $(document).ready(function(){
-        var temp = "{% url 'Authentication:login-user' 1 %}"
-        temp.replace('1', '{{status}}')
-        $('#button').click(function(){
+        var temp2 = '{{status}}'
+        var temp = "{% url 'Authentication:login-user' 1 %}".replace('1', temp2)
+        $('#submit_button').click(function(){
             $.ajax({
                 url: temp,
                 type: 'POST',
                 data: {
+                    'csrfmiddlewaretoken':'{{ csrf_token }}',
                     'email': $('#id_email').val(),
                     'password': $('#id_password').val()
                 },
