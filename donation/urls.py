@@ -5,8 +5,8 @@ from .views import *
 app_name = 'donation'
 
 urlpatterns = [
-    path('', form_donation, name='form_donation'),
-    path('status/', show_donation, name='show_donation')
+    path('', show_donation, name='show-donation'),
+    path('form/', form_donation, name='form-donation')
     
 
 
