@@ -6,8 +6,12 @@ app_name = 'donation'
 
 urlpatterns = [
     path('', show_donation, name='show-donation'),
-    path('form/', form_donation, name='form-donation')
-    
+    path('form/', form_donation, name='form-donation'),
+    path('json/', show_json, name='show_json'),
+    path('history/', show_alltime_donation, name='show_alltime_donation'),
+    path('done/<int:id>', selesai_donasi, name='done'),
+
+
 
 
 ]

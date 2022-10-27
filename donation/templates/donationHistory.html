@@ -10,36 +10,128 @@
         <style>
             .card-horizontal {
             display: flex;
-            flex: 1 1 auto;
+            flex: auto;
             }
             .photo  {
-                width: 100px;
-                height: 100px;
+                width: 200px;
+                height: 200px;
             }
         </style>
     </head>
     <body>
+        <script>
+            async function refresh()    {
+                $.get('/donation/json/', function (data) {
+                    data.map((donasi) =>
+                    $('#table-ongoing').append(
+                        `<tr" class="mylayout" >
+                            <div class="card">
+                                <div class="card-horizontal">
+                                    <div class="img-square-wrapper">
+                                        <img class="photo" src="{% static "/donation/img/photo-holder.png" %}" alt="Card image cap">
+                                    </div>
+                                    <div class="card-body">
+                                        <h4 class="card-title">Donasi ${donasi.fields.jenis_barang} </h4>
+                                        <p class="card-text">Banyak (dalam kg): ${donasi.fields.amount}</p>
+                                        <p class="card-text">Kontak: {{kontak}}</p>
+                                        <p class="card-text">Alamat: {{alamat}}</p>
+                                        <p class="card-text">Shipping method: ${donasi.fields.shipping_method}</p>
+                                        
+                                        <button type="submit" name="submit" id="button-selesai" data-id="${donasi.pk}" onclick = "myfunction()"><a class="link">Selesai</a></button>                                        
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <small class="text-muted">Last updated on ${donasi.fields.waktu_isi}</small>
+                                </div>
+                            </div>
+                    </tr>`
+                    )
+                    );
+                });
+                console.log("did that")
+                
+                $.get('/donation/history/', function (data) {
+                    data.map((donasi2) =>
+                    $('#table-history').append(
+                        `<tr" class="mylayout" >   
+                            <div class="card">
+                                <div class="card-horizontal">
+                                    <div class="img-square-wrapper">
+                                        <img class="photo" src="{% static "/donation/img/photo-holder.png" %}" alt="Card image cap">
+                                    </div>
+                                    <div class="card-body">
+                                        <h4 class="card-title">Donasi ${donasi2.fields.jenis_barang} </h4>
+                                        <p class="card-text">Banyak (dalam kg): ${donasi2.fields.amount}</p>
+                                        <p class="card-text">Kontak: {{kontak}}</p>
+                                        <p class="card-text">Alamat: {{alamat}}</p>
+                                        <p class="card-text">Shipping method: ${donasi2.fields.shipping_method}</p>                                    
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <small class="text-muted">Last updated on ${donasi2.fields.waktu_isi}</small>
+                                </div>
+                            </div>
+                    </tr>`
+                    ))
+                    console.log(data)
+                });
+            }
+            
+            function myfunction(){
+                event.preventDefault();
+                console.log("awal works")
+                
+                var pk = $('#button-selesai').data('id');
+                var url = "/donation/done/" + pk
+                const formData = {
+                    csrfmiddlewaretoken: "{{ csrf_token }}",
+                };
+                if(confirm("Yakin ingin menyelesaikan donasi?")){
+                    $.ajax({
+                    type: 'POST',
+                    url: url,
+                    data: formData,
+                    success: function(response) {
+                        console.log("works")
+                        $('#table-ongoing').empty()
+                        $('#table-history').empty()
+                        refresh()
+                    }
+                    }).done(function (data) {
+                    alert("selesai donasi!")
+                    });
+                    };
+                }
+            refresh()
+        </script>
         <div class = "photo-group">
 
         </div>
-        <div class = 'ongoing-donation'></div>
-            <h2>
-                Your ongoing donation
-            </h2>
-            <div class="card">
-                <div class="card-horizontal">
-                    <div class="img-square-wrapper">
-                        <img class="photo" src="{% static "/donation/img/photo-holder.png" %}" alt="Card image cap">
-                    </div>
-                    <div class="card-body">
-                        <h4 class="card-title">Card title</h4>
-                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
-                <div class="card-footer">
-                    <small class="text-muted">Last updated 3 mins ago</small>
-                </div>
+        <div class = "ongoing-donation">
+            <div class = "nav">
+                <h3 id = "mycoins">
+                    My points: 0
+                </h3>
             </div>
+            <h2>
+                My ongoing donation
+            </h2>
+            <table class="ongoingTable">
+                <tr id="table-ongoing" class= "mylayout">
+
+                </tr>   
+                
+            </table>
+
+        </div>
+        <div class = 'donation-history'></div>
+            <h2>
+                My donation history
+            </h2>
+            <table class="alltimeTable">
+                <tr id="table-history" class= "mylayout">
+                </tr>   
+            </table>
             
         </div>
        
