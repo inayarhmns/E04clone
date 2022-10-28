@@ -13,6 +13,7 @@ class Pengunjung(models.Model):
     jenis_kelamin = models.CharField(max_length = 2, choices = JenisKelamin.choices, default = JenisKelamin.laki_laki)
     kontak = models.CharField(max_length = 13, blank = True)
     alamat = models.CharField(max_length = 100, blank = True)
+    poin = models.IntegerField(default = 0)
 
 
 
