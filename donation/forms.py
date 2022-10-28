@@ -10,7 +10,6 @@ class DonationForm(forms.ModelForm) :
         fields = ['jenis_barang', 'amount', 'shipping_method']
         jenis_barang = forms.CharField(max_length=255)
         amount = forms.IntegerField()
-        # foto = forms.ImageField()
         shipping_method = forms.ChoiceField()
         
 

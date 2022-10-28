@@ -1,9 +1,9 @@
+from django.utils.timezone import now
 from django.shortcuts import redirect, render
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseNotFound, JsonResponse
 from django.core import serializers
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
-from requests import delete
 from donation.forms import DonationForm
 from Authentication.models import Pengunjung
 from donation.models import DonationInfo
@@ -30,7 +30,6 @@ def form_donation(request):
 def show_json(request):
     data_pengunjung = Pengunjung.objects.get(user=request.user)
     data = DonationInfo.objects.filter(pengunjung=data_pengunjung, is_done = False)
-    # print(DonationInfo.objects.filter(pengunjung= data_pengunjung).values())
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
 
 @login_required(login_url='../Authentication/login/<str:status>/')
@@ -44,33 +43,45 @@ def selesai_donasi(request, id):
     data_pengunjung = Pengunjung.objects.get(user=request.user)
     data = DonationInfo.objects.get(pk=id)
     data.is_done = True
-    tambah_coins = 3000*data.amount
-    data.points += tambah_coins
+    tambah_poin = 3000*data.amount
+    print(data_pengunjung.poin)
+    data_pengunjung.poin += tambah_poin
+    data_pengunjung.save()
     data.save()
-    print(DonationInfo.objects.filter(pengunjung= data_pengunjung).values())
-    return HttpResponse(b"CREATED", status=201)
-    
+    content = {
+        'poin' : data_pengunjung.poin
+    }
+    return JsonResponse(content, safe=False)
+
+@login_required(login_url='../Authentication/login/<str:status>/')
+def edit_donasi(request, id):
+    print(id)
+    if request.method == 'POST':
+        jenis_barang = request.POST.get("jenis_barang")
+        waktu_isi = now()
+        amount = request.POST.get("amount")
+        shipping_method = request.POST.get("shipping_method")
+        data = DonationInfo.objects.get(pk=id)
+        data.jenis_barang = jenis_barang
+        data.amount = amount
+        data.waktu_isi = waktu_isi
+        data.shipping_method = shipping_method
+        data.save()
+        # print(data)
+        print(DonationInfo.objects.filter(pk=id).values())
+        return HttpResponse(b"CREATED", status=201)
+    return HttpResponseNotFound()
 
 @login_required(login_url='../Authentication/login/<str:status>/')
 def show_donation(request):
     data_pengunjung = Pengunjung.objects.get(user=request.user)
-    
-    # data_donasi_OAT = DonationInfo.objects.filter(pengunjung=data_pengunjung, is_done = False)
-    # lst = []
-    # for i in data_donasi_OAT:
-    #     if (data_donasi_OAT.get(id) == data_pengunjung.pk):
-    #         lst.append(data_donasi_OAT)
-    # print(data_donasi_OAT.values())
-    # print(data)
-    # print(DonationInfo.objects.filter(pengunjung = data_pengunjung))
-    # print(data_donasi_OAT)
-    # print(request.user)
-    # print(primarykey)
-    # print(data_pengunjung.pk)
+    form_donation = DonationForm()
     context = {
         'user_name' : data_pengunjung.user.first_name,
         'alamat' : data_pengunjung.alamat,
         'kontak' : data_pengunjung.kontak,
+        'form_donation' : form_donation, 
+        'poin' : data_pengunjung.poin
        
     }
     return render(request, "donationHistory.html", context)

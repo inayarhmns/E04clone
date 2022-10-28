@@ -10,6 +10,8 @@ urlpatterns = [
     path('json/', show_json, name='show_json'),
     path('history/', show_alltime_donation, name='show_alltime_donation'),
     path('done/<int:id>', selesai_donasi, name='done'),
+    path('edit/<int:id>', edit_donasi, name='edit'),
+
 
 
 

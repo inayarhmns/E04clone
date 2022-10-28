@@ -7,6 +7,12 @@
 {% block content %}
 <html>
     <head>
+        <title>Bootstrap Example</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
         <style>
             .card-horizontal {
             display: flex;
@@ -36,8 +42,48 @@
                                         <p class="card-text">Kontak: {{kontak}}</p>
                                         <p class="card-text">Alamat: {{alamat}}</p>
                                         <p class="card-text">Shipping method: ${donasi.fields.shipping_method}</p>
+                                        <button type="submit" name="submit" class="button-selesai" data-id="${donasi.pk}" onclick = "selesai_donasi(${donasi.pk})">Selesai</button>   
+                                        <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal${donasi.pk}">Edit</button>          
                                         
-                                        <button type="submit" name="submit" id="button-selesai" data-id="${donasi.pk}" onclick = "myfunction()"><a class="link">Selesai</a></button>                                        
+                                        <div class="modal fade" id="myModal${donasi.pk}" role="dialog">
+                                        <div class="modal-dialog">
+                                            <!-- Modal content-->
+                                            <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                <h4 class="modal-title">Edit Data Donasi </h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <form id="modalform" method="post">
+                                                {% csrf_token %}
+                                                <div class="mb-3">
+                                                    <label for="donation-jenis" class="col-form-label">Jenis Barang</label>
+                                                    <input type="text" class="form-control" id="donation-jenis${donasi.pk}" value= "${donasi.fields.jenis_barang}">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="donation-amount" class="col-form-label">Banyak (dalam kg)</label>
+                                                    <input type="number" class="form-control" id="donation-amount${donasi.pk}"" method="post" value= "${donasi.fields.amount}">
+                                                </div>
+                                                <div class="mb-3">
+                                                    <label for="donation-ship" class="col-form-label">Shipping method</label>
+                                                    <select class="form-control"  id="donation-ship${donasi.pk}" method="post">
+                                                        <option value="Antar sendiri">Antar sendiri</option>
+                                                        <option value="JNE">JNE</option>
+                                                        <option value="POS INDONESIA">POS INDONESIA</option>
+                                                        <option value="TIKI">TIKI</option>
+                                                        <option value="SiCepat">SiCepat</option>
+                                                        <option value="J&T">J&T</option>
+                                                    </select>
+                                                </div>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                <button type="submit" value="Save" name="submit" class ="button-edit" onclick = "edit_donasi(${donasi.pk})"><a >Save</a></button>   
+                                            </div>
+                                            </div>
+                                        </div>
+                                        </div>                           
                                     </div>
                                 </div>
                                 <div class="card-footer">
@@ -73,16 +119,48 @@
                             </div>
                     </tr>`
                     ))
-                    console.log(data)
+                    
                 });
             }
-            
-            function myfunction(){
+            function edit_donasi(pk2){
+                console.log("ini pk2 " + (pk2))
+                event.preventDefault();
+                $("#myModal").modal('show');
+                console.log("awal works")
+                var linkjenis_barang = "#donation-jenis"+pk2
+                var link_amount = "#donation-amount"+pk2
+                var link_ship = "#donation-ship"+pk2
+                
+                var url = "/donation/edit/" + pk2
+                const formData = {
+                    csrfmiddlewaretoken: "{{ csrf_token }}",
+                    jenis_barang: $(linkjenis_barang).val(),
+                    amount: $(link_amount).val(),
+                    shipping_method: $(link_ship).val(),
+                };
+                $.ajax({
+                    type: 'POST',
+                    url: url,
+                    data: formData,
+                    success: function(response) {
+                        console.log("works")
+                        $('#table-ongoing').empty()
+                        refresh()
+                    }
+                    }).done(function (data) {
+                    alert("Data berhasil diubah!")
+                    $("#myModal").modal('hide');
+                    window.location = window.location;
+                    });
+                    
+                }
+
+            function selesai_donasi(pk2){
                 event.preventDefault();
                 console.log("awal works")
-                
-                var pk = $('#button-selesai').data('id');
-                var url = "/donation/done/" + pk
+                console.log("ini pk2: " + pk2)
+
+                var url = "/donation/done/" + pk2
                 const formData = {
                     csrfmiddlewaretoken: "{{ csrf_token }}",
                 };
@@ -93,8 +171,10 @@
                     data: formData,
                     success: function(response) {
                         console.log("works")
+                        console.log(response.poin)
                         $('#table-ongoing').empty()
                         $('#table-history').empty()
+                        document.getElementById("mycoins").innerHTML = "My points: " + response.poin ;
                         refresh()
                     }
                     }).done(function (data) {
@@ -110,7 +190,7 @@
         <div class = "ongoing-donation">
             <div class = "nav">
                 <h3 id = "mycoins">
-                    My points: 0
+                    My points: {{poin}}
                 </h3>
             </div>
             <h2>
