@@ -1,0 +1,18 @@
+{% extends "./base.html" %}
+{% block navbar %}
+{% include 'navbar.html' %}
+{% endblock navbar %}
+{% block ask %}
+
+<div style = "padding:10%">
+    <div style = "padding:5%">
+        <h5> Curious for more? Kindly submit your question here. </h5>
+        <form action="" method = "POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type = "button" class = "button" id = "btncreate"> Ask Us! </button>
+        </form>
+    </div>
+</div>
+
+{% endblock ask %}
