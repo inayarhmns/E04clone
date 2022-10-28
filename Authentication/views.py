@@ -11,7 +11,6 @@ from django.urls import reverse
 
 @transaction.atomic
 def register_user(request, status):
-    print(status)
     if status == 'admin' or status == 'regular':
         if request.method == "POST":
             auth = ProfileForm({
