@@ -1,18 +1,110 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block meta %}
-<title>Profile</title>
+<title>Profile | Irama Kain</title>
 {% endblock meta %}
 
 {% block content %}
 <html>
     <head>
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href= "{% static "/profile/css/style.css" %}">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     </head>
     <body>
-        <h1>
-            Ini lihat profile
-        </h1>
+        <!-- TODO: BACKEND STEVEN -->
+        <script>
+
+        </script>
+        <div class="navprofile">
+            <div class="d-flex mb-3" id = "flexnav">
+                <div class="me-auto p-2 navp-content">
+                    <a href="{% url 'Home:show_home' %}" style="text-decoration:none; " >
+                    <div class="container">
+                        <img src="../static/profile/img/back.png" width="15px" height="20px">
+                        <p class="text" style="display:inline; color: white;">Back to Home</p>
+                    </div>
+                    </a>
+                    
+                </div>
+                <a href="{% url 'donation:show-donation' %} " id="linkdonasi" style="text-decoration:none;">
+                    <div class="p-2 navp-content">My Donation</div>
+                </a>
+                <div id="linkcart" class="p-2 navp-content">My Cart</div >
+                <a href="{% url 'Authentication:logout-user' %}" id="linkout" style="text-decoration:none;">
+                    <div class="p-2 navp-content">Sign Out</div>
+                </a>
+            </div>
+        </div> 
+        <div class="myprofilediv">
+            <h2 class="textjudul">
+                My Profile
+            </h2>
+        </div>
+        
+        <div class= "profilebox">
+            <div class="mydetails">
+                <h3 class="textdetails" style="padding-bottom:30px">My Details</h3>
+                <div class="row" id="detailscontent">
+                    <div class="col">
+                       <h5 class="judul">First Name</h5>
+                        <p class="isi">Todo</p> 
+                        <hr width = 70% style= "color: black;">
+                    </div>
+                    <div class="col">
+                        <h5 class="judul"> Last Name</h5>
+                        <p class="isi">Todo</p>
+                        <hr width = 70% style= "color: black;">
+                    </div class="col">
+                    <div class="w-100"></div>
+                    <div class="col">
+                        <h5 class="judul">Email</h5>
+                        <p class="isi">Todo</p>
+                        <hr width = 70% style= "color: black;">
+                    </div>
+                    <div class="col">
+                        <h5 class="judul">Gender</h5>
+                        <p class="isi ">Todo</p>
+                        <hr width = 70% style= "color: black;">
+                    </div>
+                    <div class="w-100"></div>
+                    <div class="col">
+                        <h5 class="judul ">Contacts</h5>
+                        <p class="isi">Todo</p>
+                        <hr width = 70% style= "color: black;">
+                    </div>
+                    <div class="col">
+                        <h5 class="judul ">Address</h5>
+                        <p class="isi ">Todo</p>   
+                        <hr width = 70% style= "color: black;">  
+                    </div>
+                </div>
+                <div class="divbutton">
+                    <button class="edit" data-toggle="modal" data-target="#myModal"><p class="edittext">Edit Profile</p></button>
+                </div>
+                <!-- modal -->
+                
+                  
+
+
+
+
+
+
+
+            </div> 
+            <div class="mypoints"> 
+                <h3 class="textdetails">My Points</h3>
+                <div class="row">
+                    <h5 class="judul col">Donation Points</h5>
+                    <p class="isi col">TodoPoints</p>    
+                </div>
+                <hr style= "color: black;">
+            </div> 
+        </div>
     </body>
 </html>
 {% endblock content %}

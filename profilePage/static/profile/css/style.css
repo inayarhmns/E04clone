@@ -1,0 +1,142 @@
+body{
+    background-image: url("../img/bg.png");
+    background-repeat: repeat;
+}
+
+.navprofile {
+    justify-content: center;
+    margin-right: 10px;
+    left: -37px;
+    top: -83px;
+    padding-right: 10px;
+    padding-left: 40px;
+
+    /* iramakain/color 1 */
+    background: #3C3C3C;
+    border-radius: 0px 0px 70px 0px;}
+
+.profilebox {
+    margin: 0px 50px 50px 50px;
+    padding-top: 30px;
+    padding-left: 40px;
+    padding-right: 50px;
+    align-items: center;
+    height: 1000px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: #F3F3F3;
+    box-shadow: 0 10px 10px 10px rgb(0, 0, 0, .2);
+}
+.mydetails  {
+    text-align: left;
+}
+.textdetails    {
+    font-family: 'Test Söhne Schmal';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 64px;
+    line-height: 82px;
+    letter-spacing: 0.08em;
+
+    /* iramakain/color 3 */
+    color: #7335C2;
+}
+
+.textjudul  {
+    padding-top: 50px;
+    font-family: 'Test Söhne Schmal';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 120px;
+    line-height: 122px;
+    letter-spacing: 0.08em;
+    margin-bottom: 50px;
+    color: #FFFFFF;
+}
+.navp-content   {
+    font-family: 'Test Söhne Schmal';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 26px;
+    line-height: 61px;
+    text-align: center;
+    letter-spacing: 0.08em;
+    color: #FFFFFF;
+    text-decoration: none;
+
+}
+.judul  {
+    font-family: 'Test Söhne Schmal';
+    font-style:normal;
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 61px;
+    letter-spacing: 0.08em;
+
+    color: #000000;
+}
+.isi    {
+    font-family: 'Test Söhne Schmal';
+    font-style: normal;
+    font-weight: 300;
+    font-size: 36px;
+    line-height: 46px;
+    letter-spacing: 0.08em;
+
+    color: #000000;
+}
+.edit   {
+    /* iramakain/color 3 */
+    background: #7335C2;
+    border-radius: 16px;
+    border-style: none;
+    text-align: center;
+    padding-left: 30px;
+    padding-right: 30px;
+    float: right;
+}
+button:hover {
+    box-shadow: 0 6px 0 -4px #fff, 0 9px 0 -4px #aaa, 0 12px 0 -4px #000;
+    transform: translateY(-5px);
+}
+.edittext   {
+    font-family: 'Test Söhne Schmal';
+    padding-top: 10px;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 22px;
+    line-height: 20px;
+    text-align: center;
+    letter-spacing: 0.08em;
+
+    color: #FFFFFF;
+}
+.myprofilediv   {
+    padding-left: 50px;
+}
+#flexnav .p-2     {
+    margin-right: 50px;
+}
+.mypoints {
+    padding-top: 50px;
+    text-align: left;
+}
+.divbutton  {
+    padding-right: 200px;
+}
+/* Untuk Smartphone */
+@media all and (max-width: 750px) {
+    #linkdonasi{
+        display: none;
+    }
+    #linkcart   {
+        display: none;
+    }
+    #linkout    {
+        display: none;
+    }
+    .divbutton  {
+        display: inline;
+    }
+}
