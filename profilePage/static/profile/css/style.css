@@ -139,4 +139,10 @@ button:hover {
     .divbutton  {
         display: inline;
     }
+    #logoCoin   {
+        padding-bottom: 0px;
+    }
+    #textpoin {
+        display: none;
+    }
 }
