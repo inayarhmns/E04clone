@@ -15,8 +15,8 @@ def register_user(request, status):
         if request.method == "POST":
             auth = ProfileForm({
                 'username':request.POST.get('username'),
-                'first_name':request.POST.get('first_name'),
-                'last_name':request.POST.get('last_name'),
+                'first_name':request.POST.get('first_name').upper(),
+                'last_name':request.POST.get('last_name').upper(),
                 'email':request.POST.get('email'),
                 'password':request.POST.get('password'),
                 'password2':request.POST.get('password2')
