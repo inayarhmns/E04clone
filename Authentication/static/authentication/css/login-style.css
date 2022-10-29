@@ -23,4 +23,6 @@ body{
 
 .login-box{
     background-image: url('../img/PROMPT_FRAME.png');
+    background-repeat: no-repeat;
+    height: 700px;
 }
