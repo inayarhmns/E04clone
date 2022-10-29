@@ -97,7 +97,7 @@ body{
     float: right;
 }
 button:hover {
-    box-shadow: 0 6px 0 -4px #fff, 0 9px 0 -4px #aaa, 0 12px 0 -4px #000;
+    box-shadow: 0 6px 0 -4px #fff, 0 9px 0 -4px rgb(165, 130, 230), 0 12px 0 -4px rgb(133, 84, 185);
     transform: translateY(-5px);
 }
 .edittext   {
