@@ -2,27 +2,6 @@
 
 body{
     background-color: #381A5F;
-}
-
-#prompt{
-    min-width: 50%;
-    min-height: 50%;
-    height: 50%;
-    width: 50%;
-    position: relative;
-}
-
-/* .row{
-    min-height: 100%;
-    background-image: url('PROMPT_FRAME.png');
-} */
-/* p{
-    position: absolute;
-    padding-left: 20%;
-} */
-
-.login-box{
-    background-image: url('../img/PROMPT_FRAME.png');
-    background-repeat: no-repeat;
-    height: 700px;
+    text-align: center;
+    justify-content: center;
 }
