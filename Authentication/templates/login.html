@@ -2,8 +2,9 @@
 {% load static %}
 {% block meta %}
 <title>Authentication</title>
+
 {% load static %}
-<link rel="stylesheet" href="{% static "/authentication/css/login-style.css" %}">
+<link rel="stylesheet" href="{% static '/authentication/css/login-style.css' %}">
 
 {% endblock meta %}
 
@@ -29,11 +30,10 @@
     });
 </script>
 
-<div class = "container text-center" id = 'background-container'>
-    <div class = "row align-items-center" style = "margin-top: 10%;">
-        <div class = "col login-box">
-            <!-- <img src = "{% static 'PROMPT_FRAME.png' %}" id = 'prompt'> -->
-        </div>
-    </div>
-</div>
+<form method = "POST">
+    {% csrf_token %}
+    {{auth.as_table}}
+    {{non_auth.as_table}}
+    <input type = 'submit' id = 'submit_button' value = 'submit'>
+</form>
 {% endblock content %}
