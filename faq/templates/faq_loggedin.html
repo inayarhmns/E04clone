@@ -1,0 +1,62 @@
+{% block content %}
+
+{% extends "./baseFaq.html" %}
+
+<!-- {% block navbar %}
+{% include 'navbar.html' %}
+{% endblock navbar %} -->
+{% block ask %}
+
+<div style = "padding:10%">
+    <div style = "padding:5%">
+        <h5> Curious for more? Kindly submit your question here. </h5>
+        <form action="" method = "POST">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type = "button" class = "button" id = "btncreate"> Ask Us! </button>
+        </form>
+    </div>
+</div>
+
+<script>
+    $("#btncreate").click(function () {
+        let question = $("#question_id").val();
+        let csr = $("input[name=csrfmiddlewaretoken").val();
+        if ( question == null) {
+            console.log("Ask a question!")
+        } else {
+            console.log(question)
+            output = ""
+            question_data = {
+                question: question,
+                csrfmiddlewaretoken: csr
+            };
+            $.ajax({
+                url: "create_question/",
+                method: "POST",
+                data: question_data,
+                success: function(data) {
+                    console.log(data);
+                    question_list = data.question_data;
+                    if (data.form_is_valid == true) {
+                        console.log("Question submitted successfully")
+                        for (i = 0; i < question_list.length; i++) {
+                            output += `<div class = "accordion-item"><h2 class = "accordion-header" id = "heading` + question_list[i].id + 
+                            `"><button id = "accord" class = "accordion-button" type = "button" data-bs-toggle = "collapse" data-bs-target = "#collapse` + question_list[i].id +
+                            `" aria-expanded = "true" aria-controls="collapse` + question_list[i].id + `">` 
+                            + question_list[i].question + `</button></h2><div id = "collapse` + question_list[i].id +
+                            `" class = "accordion-collapse collapse" aria-labelledby = "heading` + question_list[i].id + 
+                            `" data-bs-parent = "#accordionExample"><div class = "accordion-body"><strong> Answer: </strong>` + question_list[i].answer +
+                            `</div></div></div>`
+                        }
+                        $("#accordionExample").html(output);
+                        $("form")[0].reset();
+                    }
+                },
+            });
+        } 
+    });
+</script>
+
+{% endblock ask %}
+{% endblock content %}
