@@ -23,6 +23,7 @@ urlpatterns = [
     path('faq/', include('faq.urls')),
     path('profile/', include('profilePage.urls')),
     path('donation/', include('donation.urls')),
+    path('partnership/', include('partnership.urls')),
 ]
 
 # TODO: Implement Routings Here
