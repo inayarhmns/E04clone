@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'faq',
     'profilePage',
     'donation',
-    'widget_tweaks',
 
 ]
 
