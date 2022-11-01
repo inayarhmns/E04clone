@@ -34,7 +34,7 @@ color: #7335C2;
     color: #7335C2;
 }
 .navbar {
-    position: sticky;
+    position:fixed;
     top: 0px;
     width: 100%;
     z-index: 100;
@@ -46,27 +46,43 @@ section{
     min-height: 100vh;
     background: linear-gradient(222.87deg, #7335C2 0.92%, #AAC38A 75.27%);
 }
-section::before{
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 50%;
-    height: 100%;
-} 
-.container{
+.container1{
     position: relative;
     min-width: 1100px;
     min-height: 550px;
     display: flex;
     z-index: 1000;
 }
-.container .headerText{
-    width: 400px; 
-    margin: auto; 
+.header{
+    font-family: 'Stratford';
+    font-weight: 400;
+    font-size: 66.1755px;
     text-align: center;
+    color: #FFFFFF;
+    text-shadow: -4.06275px 2.7085px 2.7085px rgba(0, 0, 0, 0.25);
 }
-.container .contactInfo{
+.messageText{
+    margin-top: 50px;
+    font-family: 'Stratford';
+    font-weight: 400;
+    font-size: 50px;
+    color: #FFFFFF;
+    vertical-align: top;
+    text-shadow: -4.06275px 2.7085px 2.7085px rgba(0, 0, 0, 0.25);
+}
+.subheader{
+    font-family: 'Helvetica';
+    margin: auto;
+    font-weight: 500;
+    font-size: 20.3138px;
+    width: 669px;
+    line-height: 23px;
+    text-align: center;
+    letter-spacing: 0.08em;
+
+    color: #F3F3F3;
+}
+.container1 .contactInfo{
     position: absolute;
     top: 40px;
     width: 350px;
@@ -81,17 +97,17 @@ section::before{
     border-radius: 39px;
     box-shadow: 0 20px 25px rgba(0,0,0,0.15);
 }
-.container .contactInfo h2{
+.container1 .contactInfo h2{
     color: #F3F3F3;
     font-family: 'Test Söhne';
     font-size: 24px;
     font-weight: 500;
 }
-.container .contactInfo ul.info{
+.container1 .contactInfo ul.info{
     position: relative;
     margin: 20px 0;
 }
-.container .contactInfo ul.info li{
+.container1 .contactInfo ul.info li{
     position: relative;
     list-style: none;
     display: flex;
@@ -99,31 +115,31 @@ section::before{
     cursor: pointer;
     align-items: flex-start;
 }
-.container .contactInfo ul.info li span:nth-child(1){
+.container1 .contactInfo ul.info li span:nth-child(1){
     width: 30px;
     min-width: 30px;
 }
-.container .contactInfo ul.info li span:nth-child(1) img{
+.container1 .contactInfo ul.info li span:nth-child(1) img{
     max-width: 100%;
 }
-.container .contactInfo ul.info li span:nth-child(2){
+.container1 .contactInfo ul.info li span:nth-child(2){
     color: #F3F3F3;
     font-family: Helvetica;
     margin-left: 10px;
     font-weight: 400;
 }
-.container .contactInfo ul.sci{
+.container1 .contactInfo ul.sci{
     position:relative;
     display: flex;
 }
-.container .contactInfo ul.sci li{
+.container1 .contactInfo ul.sci li{
     list-style: none;
     margin-right: 15px;
 }
-.container .contactInfo ul.sci li a{
+.container1 .contactInfo ul.sci li a{
     text-decoration: none;
 }
-.container .contactForm{
+.container1 .contactForm{
     position: absolute;
     padding: 70px 50px;
     padding-left: 250px;
@@ -134,31 +150,31 @@ section::before{
     border-radius: 39px;
     box-shadow: 0 50px 50px rgba(0,0,0,0.25);
 }
-.container .contactForm h2{
+.container1 .contactForm h2{
     color: #3C3C3C;
     font-size: 24px;
     font-weight: 500;
     font-family: 'Test Söhne';
 }
-.container .contactForm .formBox{
+.container1 .contactForm .formBox{
     position: relative;
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     padding-top: 30px;
 }
-.container .contactForm .formBox .inputBox{
+.container1 .contactForm .formBox .inputBox{
     position: relative;
     margin-bottom: 35px;
 }
-.container .contactForm .formBox .inputBox.w50{
+.container1 .contactForm .formBox .inputBox.w50{
     width: 47%;
 }
-.container .contactForm .formBox .inputBox.w100{
+.container1 .contactForm .formBox .inputBox.w100{
     width: 100%;
 }
-.container .contactForm .formBox .inputBox input,
-.container .contactForm .formBox .inputBox textarea{
+.container1 .contactForm .formBox .inputBox input,
+.container1 .contactForm .formBox .inputBox textarea{
     background-color: #F3F3F3;
     width: 100%;
     resize: none;
@@ -170,10 +186,10 @@ section::before{
     outline: none;
     border-bottom: 1px solid #3C3C3C;
 }
-.container .contactForm .formBox .inputBox textarea{
+.container1 .contactForm .formBox .inputBox textarea{
     height: 120px;
 }
-.container .contactForm .formBox .inputBox span{
+.container1 .contactForm .formBox .inputBox span{
     position: absolute;
     left: 0;
     padding: 5px 0;
@@ -182,10 +198,10 @@ section::before{
     font-weight: 300;
     transition: 0.3s;
 }
-.container .contactForm .formBox .inputBox input:focus ~ span,
-.container .contactForm .formBox .inputBox input:valid ~ span,
-.container .contactForm .formBox .inputBox textarea:focus ~ span,
-.container .contactForm .formBox .inputBox textarea:valid ~ span{
+.container1 .contactForm .formBox .inputBox input:focus ~ span,
+.container1 .contactForm .formBox .inputBox input:valid ~ span,
+.container1 .contactForm .formBox .inputBox textarea:focus ~ span,
+.container1 .contactForm .formBox .inputBox textarea:valid ~ span{
     transform: translateY(-20px);
     font-size: 12px;
     font-weight: 400;
@@ -193,7 +209,7 @@ section::before{
     color: #7335C2;
     font-weight: 500;
 }
-.container .contactForm .formBox .inputBox input[type="submit"]{
+.container1 .contactForm .formBox .inputBox input[type="submit"]{
     position: relative;
     cursor: pointer;
     background: #3C3C3C;
@@ -205,6 +221,25 @@ section::before{
     font-weight: 500;
     border-radius: 30px;
 }
-.container .contactForm .formBox .inputBox input[type="submit"]:hover{
+.container1 .contactForm .formBox .inputBox input[type="submit"]:hover{
     background:#7335C2;  
+}
+.container2{
+    margin-top: 100px;
+    position: relative;
+    min-width: 1100px;
+    min-height: 550px;
+    display: flex;
+    z-index: 1000;
+}
+.container2 .messageUser{
+    position: absolute;
+    padding: 70px 50px;
+    padding-left: 250px;
+    margin-left: 150px;
+    width: calc(100% - 150px);
+    height: 100%;
+    background:#F3F3F3;
+    border-radius: 39px;
+    box-shadow: 0 50px 50px rgba(0,0,0,0.25);
 }
