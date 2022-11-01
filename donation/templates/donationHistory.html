@@ -185,118 +185,104 @@
         <!-- NAVBAR -->
         <nav class="navbar navbar-expand-lg bg-light">
             <div class="container-fluid">
-              <a class="navbar-brand" href="{% url 'Home:show_home' %}">Irama Kain</a>
+              <a class="navbar-brand" href="#">Irama Kain</a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
               </button>
               <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{% url 'donation:show-donation' %} ">My Donations</a>
+                    <a class="nav-link" aria-current="page" href="#">My Donations</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="#">Shop</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="{% url 'faq:index' %}" >FaQ</a>
+                    <a class="nav-link" href="#">FaQ</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="#">Partnership</a>
                   </li>
                 </ul>
                 <div class="d-flex">
-                    <a class="nav-link" href="#" style="margin-right: 20px">
+                    <a class="nav-link" href="#" >
                         <img class="me-2 p-2 nav-item" src="../static/donation/img/cart.png" style="width: 45px; height:45px; ">
                     </a>
                     <div class="containers col p-2" style="padding-top: 12px; margin-left: 10px; margin-right: 30px;">
                         <img src="../static/profile/img/Coins.png" style="display: inline; width: 25px; height: 25px;">
                         <p class="nav-link" style="display: inline; font-size: 16px;">{{poin}}</p>
                     </div>
-                    <a class="p-2 nav-link" href="{% url 'Authentication:logout-user' %}">Sign Out</a>
+                    <a class="p-2 nav-link" href="#">Sign Out</a>
                 </div>
               </div>
             </div>
           </nav>
           <!-- END NAVBAR -->
-        <div class="donation">
-            <div class = "row photo-group">
-                
-                <div class="col sea-group">
-                <div class="row" style="float:right; width:600px; padding-right:20px">
-                    <div class="col" id="batasAtas"></div>
-                    <div class="w-100"></div>
-                    <div class="col sea">
-                        <div class="linearmove waveshort">
-                            <img class="sea-item" src="../static/donation/img/cloth.png">
-                            <img class= "box" src="../static/donation/img/wave1.png">
-                        </div>
-                        <div class="linearmove wave2">
-                            <img class="sea-item" src="../static/donation/img/bottle.png">
-                            <img class="sea-item" src="../static/donation/img/fishbone.png">
-                        </div>
-                        <div class="linearmove wave4">
-                            <img class="box" src="../static/donation/img/wave1.png">
-                        </div>
-                        <div class="linearmove">
-                            <img class="sea-item" src="../static/donation/img/plastic.png">
-                            <img class= "box" src="../static/donation/img/wave2.png">
-                        </div>
-                        
-                        <div class="linearmove wave3">
-                            <img class="sea-item" src="../static/donation/img/sandal.png">
-                            <img class= "box" src="../static/donation/img/wave3.png">
-                        </div>
-                        
-                        
-                        <!-- <div class="linearmove">
-                            <img class="box wave3" src="../static/donation/img/wave3.png">
-                        </div>
-                        <div class="linearmove waveshort">
-                            <img class="box wave3" src="../static/donation/img/cloth.png">
-                        </div> -->
+        <div class = "photo-group">
+            <div class="text-group">
+
+            </div>
+            <div class="row" style="float:right; width:600px; padding-right:20px">
+                <div class="col bg-dark" id="batasAtas"></div>
+                <div class="w-100"></div>
+                <div class="col sea">
+                    <div class="linearmove waveshort">
+                        <img class="sea-item" src="../static/donation/img/cloth.png">
+                        <img class= "box" src="../static/donation/img/wave1.png">
                     </div>
-                    <div class="w-100"></div>
-                    <div class="col" id="batasBawah"></div>
-                </div>
-                </div>
-                <div class="col text-group">
-                    <p class="text-photo">
-                        Microplastics are estimated to enter the ocean each year of 14 million tonnes. 
-                    </p>
-                    <p class="text-photo">
-                        About 16-35% microplastics released to the oceans are from synthetic textiles which is caused by the vast fashion production in the recent times. (www.eea.europa.eu)
-                    </p>
-                    <p class="text-photo">
-                        A sustainable fashion production is needed for reducing the release of microplastic toxins to the oceans as well as recycling clothes!
-                    </p>
-                    <p class="text-photo" style="color:#7335C2;">
-                        Irama Kain exists to provide this act for a better and healthier ocean!
-                    </p>
-                </div>    
-                
-            </div> 
-            <div class = "ongoing-donation" style="display:block; ">
-                <h2>
-                    My ongoing donation
-                </h2>
-                <table class="ongoingTable">
-                    <tr id="table-ongoing" class= "mylayout">
-
-                    </tr>   
+                    <div class="linearmove wave2">
+                        <img class="sea-item" src="../static/donation/img/bottle.png">
+                        <img class="sea-item" src="../static/donation/img/fishbone.png">
+                    </div>
+                    <div class="linearmove wave4">
+                        <img class="box" src="../static/donation/img/wave1.png">
+                    </div>
+                    <div class="linearmove">
+                        <img class="sea-item" src="../static/donation/img/plastic.png">
+                        <img class= "box" src="../static/donation/img/wave2.png">
+                    </div>
                     
-                </table>
-
+                    <div class="linearmove wave3">
+                        <img class="sea-item" src="../static/donation/img/sandal.png">
+                        <img class= "box" src="../static/donation/img/wave3.png">
+                    </div>
+                    
+                    
+                    <!-- <div class="linearmove">
+                        <img class="box wave3" src="../static/donation/img/wave3.png">
+                    </div>
+                    <div class="linearmove waveshort">
+                        <img class="box wave3" src="../static/donation/img/cloth.png">
+                    </div> -->
+                </div>
+                <div class="w-100"></div>
+                <div class="col bg-dark" id="batasBawah"></div>
             </div>
-            <div class = 'donation-history'></div>
-                <h2>
-                    My donation history
-                </h2>
-                <table class="alltimeTable">
-                    <tr id="table-history" class= "mylayout">
-                    </tr>   
-                </table>
+            
                 
-            </div>
+            
+        </div>
+        <div class = "ongoing-donation">
+            <h2>
+                My ongoing donation
+            </h2>
+            <table class="ongoingTable">
+                <tr id="table-ongoing" class= "mylayout">
+
+                </tr>   
+                
+            </table>
+
+        </div>
+        <div class = 'donation-history'></div>
+            <h2>
+                My donation history
+            </h2>
+            <table class="alltimeTable">
+                <tr id="table-history" class= "mylayout">
+                </tr>   
+            </table>
+            
         </div>
        
     </body>
