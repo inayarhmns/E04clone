@@ -3,68 +3,56 @@
 {% block meta %}
 <title>Authentication</title>
 {% load static %}
-<link rel="stylesheet" href="{% static "/authentication/css/login-style.css" %}">
-
+<link rel="stylesheet" href="{% static '/authentication/css/login-style.css' %}">
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 {% endblock meta %}
 
 {% block content %}
-<script>
-    $(document).ready(function(){
-        var temp2 = '{{status}}'
-        var temp = "{% url 'Authentication:login-user' 1 %}".replace('1', temp2)
-        $('#submit_button').click(function(e){
-            if($('#id_email').val().length !== 0 && $('#id_password').val().length !== 0){
-                $.ajax({
-                    url: temp,
-                    type: 'POST',
-                    data: {
-                        'csrfmiddlewaretoken':'{{ csrf_token }}',
-                        'email': $('#id_email').val(),
-                        'password': $('#id_password').val()
-                    },
-                    success: function(data){
-                        if (data !== 'User Not Registered'){
-							get_data();
-                        }
-						else{
-							alert(data);
-						}
-                    }
-                });
-            }
-            else{
-                alert('Email atau password tidak boleh kosong');
-            }
-        });
-    });
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'Home:show_home' %}">Irama Kain</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Shop</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'faq:index' %}" >FaQ</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Partnership</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
 
-	function get_data(){
-		$.ajax({
-			url: "{% url 'Authentication:json' %}",
-			type: "GET",
-			dataType: "json",
-			success: function(data){
-				if (data.gender === "LK"){
-					alert('hello world');
-					$('#card_image').attr('src', "{% static '/authentication/img/man.jpg' %}");
-				}
-				else{
-					$('#card_image').attr('src', "{% static '/authentication/img/woman.jpg' %}");
-				}
-			}
-		});
-	}
+<script>
+  var temp2 = '{{status}}';
+  var csrf = '{{csrf_token}}';
+  var temp = "{% url 'Authentication:login-user' 1 %}".replace('1', temp2);
+  var jsonUrl = "{% url 'Authentication:json' %}";
+  var manUrl = "{% static '/authentication/img/man.jpg' %}";
+  var womanUrl = "{% static '/authentication/img/woman.jpg' %}";
+  var redirectUrl = "{% url 'Home:show_home' %}";
+  var redirectUrlRegister = "{% url 'Authentication:register-user' 1 %}".replace('1', temp2);
 </script>
 
+<script type="text/JavaScript" src="{% static '/authentication/js/loginScript.js' %}"></script>
+
 <div class = 'd-flex flex-column min-vh-100 justify-content-center align-items-center' id = 'main_container'> 
-    <div class="card mb-3 shadow-lg" style="max-width: 700px;">
+    <div class="card mb-3 shadow-lg" style="max-width: 700px;" id = myCard>
         <div class="row g-0">
-          <div class="col-md-4">
+          <div class="col-md-4" id = 'card_image_col'>
             <img src="{% static '/authentication/img/irama_kain.png' %}" class="img-fluid rounded-start" id = 'card_image'>
           </div>
           <div class="col-md-8">
-            <div class="card-body">
-              <h1 class="card-title">Login</h5>
+            <div class="card-body" id = 'card_body'>
+              <h1 class="card-title" id = 'card_title' style = 'font-family: Stratford; color: #7335C2;'>Irama Kain</h1>
               <form id = 'form-login'>
                 <div class="mb-3">
                   <label for="id_email" class="form-label">Email address</label>
@@ -75,11 +63,43 @@
                   <label for="id_password" class="form-label">Password</label>
                   {{auth.password}}
                 </div>
-                <button type="button" class="btn btn-primary" id = 'submit_button'>Submit</button>
+                <label for = '#registerLink'>Don't have an account?</label>
+                <a href = '#'  id = "registerLink">register<br></a>
+                <button type="button" class="btn btn-outline-light" id = 'submit_button'>Login</button>
               </form>
             </div>
           </div>
         </div>
       </div>
 </div>
+
+<div class = 'container-fluid' id = 'container_footer'>
+  <div class = 'row row-cols-auto justify-content-center' style = 'font-family:Stratford;color: #7335C2;height: 70px; padding-top: 10px;' id = 'row1_footer'>
+    <div class = 'col-md-4' style = 'height: fit-content; width: 30px;'>
+      <button type = 'button' class = 'btn btn-link'><img src = "{% static '/authentication/img/facebook.png' %}" style = 'height: 20px; width: 20px;'></a>
+    </div>  
+    <div class = 'col-md-4' style = 'height: fit-content; width: 30px; margin-left: 20px;'>
+      <button type = 'button' class = 'btn btn-link'><img src = "{% static '/authentication/img/instagram.png' %}" style = 'height: 20px; width: 20px;'></a>
+    </div>
+    <div class = 'col-md-4' style = 'height: fit-content; width: 30px; margin-left: 20px;'>
+      <button type = 'button' class = 'btn btn-link'><img src = "{% static '/authentication/img/linked_in.png' %}" style = 'height: 20px; width: 20px;'></a>
+    </div>
+    <div class = 'col-md-4' style = 'height: fit-content; width: 30px; margin-left: 20px;'>
+      <button type = 'button' class = 'btn btn-link'><img src = "{% static '/authentication/img/twitter.png' %}" style = 'height: 20px; width: 20px;'></a>
+    </div>
+    <div class = 'col-md-4' style = 'height: fit-content; width: 30px; margin-left: 20px;'>
+      <button type = 'button' class = 'btn btn-link'><img src = "{% static '/authentication/img/amazon.png' %}" style = 'height: 20px; width: 20px;'></a>
+    </div>
+  </div>
+  <div class = 'row row-cols-auto justify-content-center' id = 'row2_footer'>
+    <p style = 'margin-left: 40px;'>©️2022 Copyright: Irama Kain</p>
+  </div>
+</div>
+
+<script>
+  if (temp2 === 'admin'){
+    $("#card_title").append('<br>(admin)');
+  }
+  $('#registerLink').attr('href', redirectUrlRegister);
+</script>
 {% endblock content %}

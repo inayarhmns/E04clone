@@ -53,9 +53,3 @@ color: #7335C2;
 #row1_footer, #row2_footer{
     background-color: #f3f3f3;
 }
-
-@media all and (max-width: 800px) {
-    #card_image_col {
-        display: none;
-    }
-}
