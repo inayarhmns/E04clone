@@ -14,9 +14,45 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
+        <nav class="navbar navbar-expand-lg bg-light">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="{% url 'Home:show_home' %}">Irama Kain</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarText">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{% url 'donation:show-donation' %} ">My Donations</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Shop</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="{% url 'faq:index' %}" >FaQ</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Partnership</a>
+                  </li>
+                </ul>
+                <div class="d-flex">
+                    <a class="nav-link" href="#" style="margin-right: 20px">
+                        <img class="me-2 p-2 nav-item" src="../static/donation/img/cart.png" style="width: 45px; height:45px; ">
+                    </a>
+                    <div class="containers col p-2" style="padding-top: 12px; margin-left: 10px; margin-right: 30px;">
+                        <img src="../static/profile/img/Coins.png" style="display: inline; width: 25px; height: 25px;">
+                        <p class="nav-link" style="display: inline; font-size: 16px;">{{poin}}</p>
+                    </div>
+                    <a class="p-2 nav-link" href="{% url 'Authentication:logout-user' %}">Sign Out</a>
+                </div>
+              </div>
+            </div>
+          </nav>
         <section>
-            <h1>Get in Touch !!</h1>
             <div class="container">
+                <div class="headerText">
+                    <h1></h1>
+                </div>
                 <div class="contactInfo">
                     <div>
                         <h2>Contact Info</h2>
