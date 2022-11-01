@@ -1,0 +1,201 @@
+/* NAVBAR */
+.donationhistory    {
+    display: block;
+}
+.nav-link  {
+    font-family: 'Test Söhne';
+    font-style: normal;
+    font-weight: 550;
+    font-size: 18px;
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+    /* iramakain/color 1 */
+    color: #3C3C3C;
+}
+.navbar-brand   {
+font-family: 'Stratford';
+font-style: normal;
+font-weight: 400;
+font-size: 26px;
+line-height: 34px;
+letter-spacing: 0.08em;
+margin-bottom: 10px;
+/* iramakain/color 3 */
+color: #7335C2;
+
+}
+.nav-item   {
+        margin-left: 20px;
+}
+.nav-link:hover {
+    color: #7335C2;
+}
+.navbar {
+    position: sticky;
+    top: 0px;
+    width: 100%;
+    z-index: 100;
+}
+/* END NAVBAR */
+
+
+body{
+    background-color: #F3F3F3;
+}
+.sea    {
+    padding-left: 40px;
+    display: inline-flex;
+    background: rgba(4, 146, 190, 0.59);    
+    float: right;
+    width: 700px;
+    height: 600px;
+    
+}
+.photo-group    {
+    height: 900px;
+    padding: 0px 0px 0px 0px;
+}
+#batasAtas  {
+    background-color: #F3F3F3;
+    height: 60px; 
+    float:right; 
+    width: 700px;
+    z-index: 99;
+}
+#batasBawah {
+    background-color: #F3F3F3;
+    height: 250px; 
+    float:right; 
+    width: 700px;
+    z-index: 99;
+
+}
+.linearmove {
+    animation: slideDown 3s linear infinite
+}
+
+.wave2  {
+    animation: slideDown1 5s linear infinite
+}
+.wave3  {
+    animation: slideDown2 4s linear infinite
+}
+.wave4  {
+    animation: slideDown1 2s linear infinite
+}
+.waveshort  {
+    animation: slideDown2 3s linear infinite
+}
+@keyframes slideDown {
+    0% {
+      transform: translateY(-600px);
+    }
+    100% {
+      transform: translateY(600px);
+    }
+  }
+@keyframes slideDown1 {
+    0% {
+      transform: translateY(-200px);
+    }
+    100% {
+      transform: translateY(600px);
+    }
+  }
+  @keyframes slideDown2 {
+    0% {
+      transform: translateY(-200px);
+    }
+    100% {
+      transform: translateY(600px);
+    }
+  }
+ 
+  .box {  
+    align-self: center;
+    text-align: center;
+    animation: wobble 1s ease infinite;
+    
+}
+.sea-item:hover   {
+    animation:wobble 2s ease infinite
+}
+@keyframes wobble {
+0%, 100% {
+    -webkit-transform: translateX(0%);
+    transform: translateX(0%);
+    -webkit-transform-origin: 50% 50%;
+    transform-origin: 50% 50%;
+}
+
+15% {
+    -webkit-transform: translateX(-32px) rotate(-10deg);
+    transform: translateX(-32px) rotate(-10deg);
+}
+
+30% {
+    -webkit-transform: translateX(calc(32px / 2)) rotate(10deg);
+    transform: translateX(calc(32px / 2)) rotate(10deg);
+}
+
+45% {
+    -webkit-transform: translateX(calc(-32px / 2)) rotate(calc(-10deg / 1.8));
+    transform: translateX(calc(-32px / 2)) rotate(calc(-10deg / 1.8));
+}
+
+60% {
+    -webkit-transform: translateX(calc(32px / 3.3)) rotate(calc(10deg / 3));
+    transform: translateX(calc(32px / 3.3)) rotate(calc(10deg / 3));
+}
+
+75% {
+    -webkit-transform: translateX(calc(-32px / 5.5)) rotate(calc(-10deg / 5));
+    transform: translateX(calc(-32px / 5.5)) rotate(calc(-10deg / 5));
+}
+}
+.text-group {
+    margin-top: 10px;
+}
+.text-photo   {
+padding: 40px 0px 0px 50px;
+font-family: 'Stratford';
+font-style: normal;
+font-weight: 500;
+text-align: right;
+font-size: 22px;
+line-height: 30px;
+/* iramakain/color 1 */
+color: #3C3C3C;
+animation: slideDownText .8s ease-in-out  forwards;
+}
+@keyframes slideDownText {
+    0% {
+      transform: translateY(-200px)  scale(1.2);
+      opacity: 50%;
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
+@keyframes slideIn {
+    0% {
+      transform: translateX(500px) scale(1.2);
+    }
+    100% {
+      transform: translateX(0px) scale(1);
+    }
+  }
+@keyframes slideUp {
+    0% {
+      transform: translateY(300px) scale(1.2);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
+  @media all and (max-width: 750px) {
+    .donation   {
+        display: inline-block;
+    }
+    
+}

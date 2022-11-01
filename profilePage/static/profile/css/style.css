@@ -32,7 +32,7 @@ body{
     text-align: left;
 }
 .textdetails    {
-    font-family: 'Test Söhne Schmal';
+    font-family: 'Test Söhne ';
     font-style: normal;
     font-weight: 600;
     font-size: 64px;
@@ -45,7 +45,7 @@ body{
 
 .textjudul  {
     padding-top: 50px;
-    font-family: 'Test Söhne Schmal';
+    font-family: 'Test Söhne ';
     font-style: normal;
     font-weight: 600;
     font-size: 120px;
@@ -53,12 +53,17 @@ body{
     letter-spacing: 0.08em;
     margin-bottom: 50px;
     color: #FFFFFF;
+    animation: slideUp .8s ease-in-out  forwards 1s;
+
 }
+
+
+
 .navp-content   {
-    font-family: 'Test Söhne Schmal';
+    font-family: 'Test Söhne ';
     font-style: normal;
     font-weight: 500;
-    font-size: 26px;
+    font-size: 18px;
     line-height: 61px;
     text-align: center;
     letter-spacing: 0.08em;
@@ -66,21 +71,25 @@ body{
     text-decoration: none;
 
 }
+.navp-content:hover{
+    background-color: purple;
+}
+
 .judul  {
-    font-family: 'Test Söhne Schmal';
+    font-family: 'Test Söhne ';
     font-style:normal;
     font-weight: 500;
-    font-size: 32px;
+    font-size: 25px;
     line-height: 61px;
     letter-spacing: 0.08em;
 
     color: #000000;
 }
 .isi    {
-    font-family: 'Test Söhne Schmal';
+    font-family: 'Test Söhne ';
     font-style: normal;
     font-weight: 300;
-    font-size: 36px;
+    font-size: 20px;
     line-height: 46px;
     letter-spacing: 0.08em;
 
@@ -101,7 +110,7 @@ button:hover {
     transform: translateY(-5px);
 }
 .edittext   {
-    font-family: 'Test Söhne Schmal';
+    font-family: 'Test Söhne ';
     padding-top: 10px;
     font-style: normal;
     font-weight: 500;
@@ -125,6 +134,14 @@ button:hover {
 .divbutton  {
     padding-right: 200px;
 }
+@keyframes slideUp {
+  0% {
+    transform: translateY(300px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
 /* Untuk Smartphone */
 @media all and (max-width: 750px) {
     #linkdonasi{
@@ -145,4 +162,12 @@ button:hover {
     #textpoin {
         display: none;
     }
+    .row  {
+        display:inline-block;
+    }
+    .profilebox {
+        height: 1400px;
+        margin: 0px 10px 5px 10px;
+    }
+    
 }
