@@ -34,7 +34,7 @@ color: #7335C2;
     color: #7335C2;
 }
 .navbar {
-    position:fixed;
+    position:sticky;
     top: 0px;
     width: 100%;
     z-index: 100;
@@ -54,15 +54,18 @@ section{
     z-index: 1000;
 }
 .header{
+    margin-top: 50px;
     font-family: 'Stratford';
     font-weight: 400;
     font-size: 66.1755px;
     text-align: center;
     color: #FFFFFF;
+    vertical-align: top;
     text-shadow: -4.06275px 2.7085px 2.7085px rgba(0, 0, 0, 0.25);
 }
 .messageText{
     margin-top: 50px;
+    margin-bottom: 100px;
     font-family: 'Stratford';
     font-weight: 400;
     font-size: 50px;
