@@ -14,6 +14,38 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     </head>
+    <script>
+        $(document).ready(function(){
+            $('#buttonEdit').click(function(){
+                $.ajax({
+                   url: "{% url 'profilePage:editProfile' %}",
+                   type: "POST",
+                   data: {
+                    'csrfmiddlewaretoken': '{{ csrf_token }}',
+                    'first_name': $('#form_first_name').val(),
+                    'last_name': $('#form_last_name').val(),
+                    'kontak': $('#form_kontak').val(),
+                    'gender': $('.form-check input:radio:checked').val(),
+                    'address': $('#form_address').val()
+                   },
+                   success: function(data){
+                        alert(data);
+                        $('#id_first_name').html($('#form_first_name').val().toUpperCase());
+                        $('#id_last_name').html($('#form_last_name').val().toUpperCase());
+                        $('#id_kontak').html($('#form_kontak').val());
+                        console.log($('.form-check input:radio:checked').val());
+                        if ($('.form-check input:radio:checked').val() == "LK"){
+                            $('#id_gender').html('Laki-Laki');
+                        }
+                        else{
+                            $('#id_gender').html('Perempuan');
+                        }
+                        $('#id_address').html($('#form_address').val());
+                   }
+                });
+            });
+        });
+    </script>
     <body>
         <!-- TODO: BACKEND STEVEN -->
         <script>
@@ -51,50 +83,95 @@
                 <div class="row" id="detailscontent">
                     <div class="col">
                        <h5 class="judul">First Name</h5>
-                        <p class="isi">Todo</p> 
+                        <p class="isi" id = 'id_first_name'>{{first_name}}</p> 
                         <hr width = 70% style= "color: black;">
                     </div>
                     <div class="col">
                         <h5 class="judul"> Last Name</h5>
-                        <p class="isi">Todo</p>
+                        <p class="isi" id= 'id_last_name'>{{last_name}}</p>
                         <hr width = 70% style= "color: black;">
                     </div class="col">
                     <div class="w-100"></div>
                     <div class="col">
                         <h5 class="judul">Email</h5>
-                        <p class="isi">Todo</p>
+                        <p class="isi" id = 'id_email'>{{email}}</p>
                         <hr width = 70% style= "color: black;">
                     </div>
                     <div class="col">
                         <h5 class="judul">Gender</h5>
-                        <p class="isi ">Todo</p>
+                        {% if gender %}
+                            <p class="isi" id = 'id_gender'>Laki-Laki</p>
+                        {% else %}
+                            <p class="isi" id = 'id_gender'>Perempuan</p>
+                        {% endif %}
                         <hr width = 70% style= "color: black;">
                     </div>
                     <div class="w-100"></div>
                     <div class="col">
                         <h5 class="judul ">Contacts</h5>
-                        <p class="isi">Todo</p>
+                        <p class="isi" id = 'id_kontak'>{{kontak}}</p>
                         <hr width = 70% style= "color: black;">
                     </div>
                     <div class="col">
                         <h5 class="judul ">Address</h5>
-                        <p class="isi ">Todo</p>   
+                        <p class="isi " id = 'id_address'>{{address}}</p>   
                         <hr width = 70% style= "color: black;">  
                     </div>
                 </div>
-                <div class="divbutton">
-                    <button class="edit" data-toggle="modal" data-target="#myModal"><p class="edittext">Edit Profile</p></button>
+                <div class="divbutton" id = 'edit_button'>
+                    <button class="edit" data-bs-toggle="modal" data-bs-target="#myModal"><p class="edittext">Edit Profile</p></button>
                 </div>
-                <!-- modal -->
-                
-                  
-
-
-
-
-
-
-
+  
+                <!-- Modal -->
+                <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="createTaskModal">Edit Profile</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id = "newForm">
+                                {% csrf_token %}
+                                <label class = "col-form-label">First Name</label>
+                                <input type = "text" class = "form-control" id = form_first_name value = '{{first_name}}'>
+                                <label class = "col-form-label">Last Name</label>
+                                <input type = "text" class = "form-control" id = form_last_name value = '{{last_name}}'>
+                                <label class = "col-form-label">Contacts</label>
+                                <input type = "text" class = "form-control" id = form_kontak value = '{{kontak}}'>
+                                <label class = "col-form-label">Gender</label>
+                                <div class="form-check">
+                                    {% if gender %}
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioLK" value = "LK" checked>
+                                    {% else %}
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioLK" value = "LK">
+                                    {% endif %}
+                                    <label class="form-check-label" for="flexRadioLK">
+                                      Laki-Laki
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    {% if gender == False %}
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioPP" value = "PP" checked>
+                                    {% else %}
+                                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioPP" value = "PP">
+                                    {% endif %}
+                                    <label class="form-check-label" for="flexRadioPP">
+                                      Perempuan
+                                    </label>
+                                </div>
+                                
+                                <label class = "col-form-label">Address</label>
+                                <input type = "text" class = "form-control" id = form_address value = '{{address}}'>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" id="buttonEdit">Save changes</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
             </div> 
             <div class="mypoints"> 
                 <h3 class="textdetails">My Points</h3>
@@ -103,7 +180,7 @@
                         <img src="../static/profile/img/Coins.png" id="logoCoin" style= "padding-bottom: 10px; text-align: center; width: 25px; height: 35px">
                         <p class="judul" id="textpoin" style="display:inline;">Donation Points</p>
                     </div>
-                    <p class="isi col">TodoPoints</p>    
+                    <p class="isi col">{{poin}}</p>    
                 </div>
                 <hr style= "color: black;">
             </div> 
