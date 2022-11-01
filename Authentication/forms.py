@@ -30,17 +30,39 @@ class ProfileForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2')
-        widgets = {
-            'username': forms.TextInput(attrs = {
-                'id': 'id_username'
-            }),
-            'password1': forms.PasswordInput(attrs = {
-                'id': 'id_password1'
-            }),
-            'password2': forms.PasswordInput(attrs = {
-                'id': 'id_password2'
-            }),  
-        }   
+    
+    def __init__(self, *args, **kwargs):
+        super(ProfileForm, self).__init__(*args, **kwargs)
+
+        self.fields['username'].widget.attrs = {
+            'id': 'id_username',
+            'class': 'form-control',
+        }
+        self.fields['password1'].widget.attrs = {
+            'id': 'id_password1',
+            'class': 'form-control'
+        }
+        self.fields['password2'].widget.attrs = {
+            'id': 'id_password2',
+            'class': 'form-control'
+        }
+        self.fields['first_name'].widget.attrs = {
+            'id': 'id_first_name',
+            'class': 'form-control'
+        }
+        self.fields['last_name'].widget.attrs = {
+            'id': 'id_last_name',
+            'class': 'form-control'
+        }
+        self.fields['email'].widget.attrs = {
+            'id': 'id_email',
+            'class': 'form-control',
+            'aria-describedby': 'emailHelp',
+            'required': 'required',
+            'placeholder': 'example: john@gmail.com'
+        }
+
+
     
     def clean_email(self):
         email = self.cleaned_data['email'].lower()

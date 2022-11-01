@@ -85,7 +85,6 @@ def login_user(request, status):
     else:
         return HttpResponseNotFound()
 
-@login_required(login_url='../Authentication/login/<str:status>/')
 def logout_user(request):
     status = 'regular'
     if request.user.is_staff:
@@ -95,10 +94,10 @@ def logout_user(request):
     response.delete_cookie('last_login')
     return response
 
-@login_required(login_url='../Authentication/login/<str:status>')
+@login_required(login_url='/Authentication/login/regular')
 def get_pengunjung(request):
-    first_name = request.user.first_name
-    last_name = request.user.last_name
+    first_name = request.user.first_name.upper()
+    last_name = request.user.last_name.upper()
     pengunjung = Pengunjung.objects.get(user = request.user)
     load = {
         'first_name': first_name,
