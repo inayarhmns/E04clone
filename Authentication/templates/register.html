@@ -2,36 +2,18 @@
 {% load static %}
 {% block meta %}
 <title>Authentication</title>
+<link rel="stylesheet" href="{% static '/authentication/css/register-style.css' %}">
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 {% endblock meta %}
 
 {% block content %}
 <script>
-    $(document).ready(function(){
-        $('#button1').click(function(){
-            var temp2 = '{{status}}'
-            var temp = "{% url 'Authentication:register-user' 1 %}".replace('1', temp2)
-            $.ajax({
-                url: temp,
-                type: "POST",
-                data: {
-                    'csrfmiddlewaretoken': "{{ csrf_token }}",
-                    'username': $('#id_username').val(),
-                    'first_name': $('#id_first_name').val(),
-                    'last_name': $('#id_last_name').val(),
-                    'email':$('#id_email').val(),
-                    'password':$('#id_password').val(),
-                    'password2':$('#id_password2').val(),
-                    'jenis_kelamin':$('#id_jenis_kelamin').val(),
-                    'kontak':$('#id_kontak').val(),
-                    'alamat':$('#id_alamat').val()
-                },
-                success: function(data){
-                    alert(data)
-                }
-            });
-        });
-    });
+    var csrf = '{{csrf_token}}';
+    var temp2 = '{{status}}';
+    var temp = "{% url 'Authentication:register-user' 1 %}".replace('1', temp2);
+    var redirectUrl = "{% url 'Authentication:login-user' 1 %}".replace('1', temp2);
 </script>
+<script type = "text/JavaScript" src = "{% static '/authentication/js/registerScript.js' %}"></script>
 
 <!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg bg-light">
