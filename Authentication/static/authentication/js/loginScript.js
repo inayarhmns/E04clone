@@ -42,18 +42,20 @@ function get_data(){
         dataType: "json",
         success: function(data){
             if (data.gender === "LK"){
-                $('#card_image').attr('src', manUrl);
+                $('#card_image_2').attr('src', manUrl);
             }
             else{
-                $('#card_image').attr('src', womanUrl);
+                $('#card_image_2').attr('src', womanUrl);
             }
-            $('#card_title').html('Welcome Back');
-            $('#form-login').remove();
-            $('#card_body').append(
+            $('#card_title_2').html('Welcome Back');
+            $('#form-login_2').remove();
+            $('#card_body_2').append(
                 "<div class = 'mb-3'>"+
                     "<h3>"+ data.first_name + " " + data.last_name +"</h3>" +
                 "</div>"
             );
+            $('#carouselControls').carousel('next');
+            $('#carouselControls').carousel('pause');
             setTimeout(function(){
                 window.location.href = redirectUrl;
             }, 3000);
