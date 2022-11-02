@@ -12,10 +12,6 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RemoveField(
-            model_name='shop',
-            name='type',
-        ),
         migrations.AddField(
             model_name='shop',
             name='pengunjung',
