@@ -157,7 +157,7 @@ function selesai_donasi(pk2){
             console.log(response.poin)
             $('#table-ongoing').empty()
             $('#table-history').empty()
-            $('#mycoins').html("My points: " + response.poin);
+            $('#linkpoin').html("My points: " + response.poin);
             console.log("berhasil ubah")
             // refresh()
         
