@@ -1,6 +1,7 @@
 from marketplace.forms import ShopForm
 from Authentication.models import Pengunjung
 from django.shortcuts import render
+from django.http import HttpResponse
 
 # Create your views here.
 def show_marketplace(request):
@@ -11,7 +12,7 @@ def show_marketplace(request):
             "shipping_method": request.POST.get('shipping_method')
             })   
         obj = form.save(commit = False)
-        obj.tipe = request.POST.get('tipe')
+        obj.nama_baju = request.POST.get('nama_baju')
         obj.pengunjung = Pengunjung.objects.get(user = request.user)
         obj.save()
         return HttpResponse('Payment Completed')
