@@ -29,6 +29,7 @@ color: #7335C2;
     color: #7335C2;
 }
 .navbar {
+    background-color: #fff;
     position: sticky;
     top: 0px;
     width: 100%;
@@ -333,7 +334,7 @@ button:hover {
     align-items: center;
     justify-content: center;
     align-self: center;
-    padding-bottom: 50px;
+    padding-bottom: 0px;
 }
 #table-history .mylayout .card{
     display: inline-block;

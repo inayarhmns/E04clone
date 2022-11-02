@@ -9,25 +9,28 @@ from Authentication.models import Pengunjung
 from donation.models import DonationInfo
 
 # TODO:implement views
-@login_required(login_url='../Authentication/login/<str:status>/')
+
 def form_donation(request):
-    data_pengunjung = Pengunjung.objects.get(user=request.user)
-    form = DonationForm()
-    if (request.method == 'POST'):
-        form = DonationForm(request.POST)
-        if form.is_valid():
-            temp = form.save(commit=False)
-            print(request.user)
-            temp.pengunjung = Pengunjung.objects.get(user = request.user)
-            form.save()
-            return redirect('/donation/')
+    if request.user.is_authenticated:
+        data_pengunjung = Pengunjung.objects.get(user=request.user)
+        form = DonationForm()
+        if (request.method == 'POST'):
+            form = DonationForm(request.POST)
+            if form.is_valid():
+                temp = form.save(commit=False)
+                print(request.user)
+                temp.pengunjung = Pengunjung.objects.get(user = request.user)
+                form.save()
+                return redirect('/donation/')
 
-    context = {
-        'form' : form,
-        'poin' : data_pengunjung.poin
+        context = {
+            'form' : form,
+            'poin' : data_pengunjung.poin
 
-    }
-    return render(request, "donationForm.html", context)
+        }
+        return render(request, "donationForm.html", context)
+    else:
+        return render(request, "notauth.html")
 
 @login_required(login_url='../Authentication/login/<str:status>/')
 def show_json(request):
@@ -75,17 +78,19 @@ def edit_donasi(request, id):
         return HttpResponse(b"CREATED", status=201)
     return HttpResponseNotFound()
 
-@login_required(login_url='../Authentication/login/<str:status>/')
 def show_donation(request):
-    data_pengunjung = Pengunjung.objects.get(user=request.user)
-    form_donation = DonationForm()
-    context = {
-        'user_name' : data_pengunjung.user.first_name,
-        'alamat' : data_pengunjung.alamat,
-        'kontak' : data_pengunjung.kontak,
-        'form_donation' : form_donation, 
-        'poin' : data_pengunjung.poin
-       
-    }
-    return render(request, "donationHistory.html", context)
+    if request.user.is_authenticated:
+        data_pengunjung = Pengunjung.objects.get(user=request.user)
+        form_donation = DonationForm()
+        context = {
+            'user_name' : data_pengunjung.user.first_name,
+            'alamat' : data_pengunjung.alamat,
+            'kontak' : data_pengunjung.kontak,
+            'form_donation' : form_donation, 
+            'poin' : data_pengunjung.poin
+        
+        }
+        return render(request, "donationHistory.html", context)
+    else:
+        return render(request, "notauth.html")
 

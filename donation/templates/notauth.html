@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block meta %}
+<title>Donation | Irama Kain</title>
+{% endblock meta %}
+
+{% block content %}
+<html>
+    <head>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href= "{% static "/donation/css/notauth.css" %}">
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>        
+    </head>
+    <body>
+        <h1>Sorry, you must be authenticated first</h1>
+        <a href="{% url 'Authentication:logout-user' %}">Click here to get redirected to Sign In Page</a>
+    </body>
+</html>
+{% endblock content %}
