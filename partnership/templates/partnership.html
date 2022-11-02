@@ -14,7 +14,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg bg-light">
+        <nav class="navbar navbar-expand-lg">
             <div class="container-fluid">
               <a class="navbar-brand" href="{% url 'Home:show_home' %}">Irama Kain</a>
               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -23,31 +23,31 @@
               <div class="collapse navbar-collapse" id="navbarText">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                   <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{% url 'donation:show-donation' %} ">My Donations</a>
+                    <a class="nav-link" aria-current="page" href="{% url 'donation:show-donation' %} ">Donations</a>
                   </li>
                   <li class="nav-item">
                     <a class="nav-link" href="#">Shop</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="{% url 'faq:index' %}" >FaQ</a>
+                    <a class="nav-link" href="{% url 'faq:index' %}" >F.A.Q</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href="#">Partnership</a>
+                    <a class="nav-link" href="#">Contact Us</a>
                   </li>
                 </ul>
                 <div class="d-flex">
                     <a class="nav-link" href="#" style="margin-right: 20px">
-                        <img class="me-2 p-2 nav-item" src="../static/donation/img/cart.png" style="width: 45px; height:45px; ">
+                        <img class="me-2 p-2 nav-item" src="../static/donation/img/cart.png" style="width: 40px; height:40px; ">
                     </a>
                     <div class="containers col p-2" style="padding-top: 12px; margin-left: 10px; margin-right: 30px;">
-                        <img src="../static/profile/img/Coins.png" style="display: inline; width: 25px; height: 25px;">
+                        <img src="../static/profile/img/Coins.png" style="display: inline; width: 25px; height: 25px; margin-bottom: 10px">
                         <p class="nav-link" style="display: inline; font-size: 16px;">{{poin}}</p>
                     </div>
                     <a class="p-2 nav-link" href="{% url 'Authentication:logout-user' %}">Sign Out</a>
                 </div>
               </div>
             </div>
-          </nav>
+        </nav>
         <section>
          <div>
             <div class="row">
@@ -100,12 +100,21 @@
                             <input type="text" required>
                             <span>Phone Number</span>
                         </div>
+                        <span>Message</span>
                         <div class="inputBox w100">
-                            <textarea required></textarea>
-                            <span>Message</span>
+                            <form action="formComment" aria-roledescription="{% url 'partnership:comment' %}" autocomplete="off">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="col 12">
+                                        <div class="form-group validate">
+                                            <textarea class="form-control" name="comment"></textarea>
+                                        </div>
+                                    </div>                   
+                                </div>
+                            </form>
                         </div>
                         <div class="inputBox w100">
-                            <input type="submit" value="Send">
+                            <input type="submit" class="btn btn-primary pl-5 pr-5 btnSave" value="Send">
                         </div>
                     </div>
                 </div>
@@ -113,12 +122,113 @@
 
             <div class="container2">
                 <div class="messageUser">
-                    <h2>Send us a Message</h2>
+                    <h2>Your Message</h2>
+                    <div class="comment-context mt-5" data-url="{% url 'partnership:comment_data' %}"></div>
                 </div>
             </div>
             
          </div>
         </section>
+        <footer class = "text-center text-lg-start pt-4" style = "background: #F3F3F3;
+        background: linear-gradient(0deg, #AAC38A 0%, #F3F3F3 80%); margin-top: 50px;">
+            <section class = "">
+                <div class = "container text-center text-md-start mt-5">
+                    <div class = "row mt-3">
+                        <div class="col-md-3 col-lg-4 col-xl-3 ms-5 mb-4" ALIGN = left>
+                            <img src="../static/partnership/iramakain.png" height="83px" width="150px" alt="test">
+                            <hr>
+                            <h6>
+                                The era of fashion revolution, The era of sustainable garments.
+                            </h6>
+                        </div>
+                        <div class="col-md-4 col-lg-2 col-xl-2 ms-5 mb-4">
+                            <h6 class="text-uppercase fw-bold mb-4">
+                                Explore
+                                </h6>
+                                <p>
+                                <a href="{% url 'faq:index' %}" class=" footer-text">F.A.Q</a>
+                                </p>
+                                <p>
+                                <a href="{% url 'donation:show-donation' %}" class=" footer-text">Shop</a>
+                                </p>
+                                <p>
+                                <a href="#" class="footer-text">Donate</a>
+                                </p>
+                                <p>
+                                    <a href="#" class="footer-text">Contact Us</a>
+                                </p>
+                        </div>
+                        <div class="col-md-8 col-lg-3 col-xl-3 ms-auto mb-md-0 mb-4">
+                            <!-- Links -->
+                            <h6 class="text-uppercase fw-bold mb-4">Our Office</h6>
+                            <p><i class="fas fa-home"></i> Fakultas Ilmu Komputer, Universitas Indonesia, Kota Depok, Jawa Barat 16425</p>
+                            <p>
+                            <i class="fas fa-envelope"></i>
+                            cs.ui.ac.id
+                            </p>
+                            <p><i class="fas fa-phone"></i>  (021) 7863419</p>
+                        </div>
+                        <div class = 'row row-cols-auto justify-content-center' id = 'row2_footer'>
+                            <h6 style = 'margin-left: 40px; margin-bottom: 40px;'>©️ 2022 Copyright: Irama Kain</h6>
+                          </div>
+                    </div>
+                </div>
+            </section>
+        </footer>
     </body>
 </html>
+
 {% endblock content %}
+
+{% block scripts %}
+<script>
+    function getComments(){
+        $ajax({
+            url: $(".comment-content").data('url'),
+            type: "GET",
+            success: function(resp){
+                $(".comment-content").html(resp);
+            },
+            error: function(resp){
+                console.log("something went wrong");
+            }
+        });
+    }
+    getComments();
+    $("formComment").on("submit", function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        var $this = $(this);
+        var valid = true;
+        $('#formComment textarea').each(function(){
+            let $this = $(this)
+
+            if(!$this.val()){
+                valid = false;
+                $this.parents('.validate').find('.mySpan').text('The '+$this.attr('name').replace(/[\_]+/g, ' '))
+            }
+        });
+
+        if(valid){
+            $(".btnSave").text('Saving...').attr('disabled',true);
+            let data = $this.serialize();
+        ajax({
+            url: $this.attr('action'),
+            type: "POST",
+            dataType: 'json',
+            success: function(resp){
+                if(resp.message === 'success'){
+                    getComments();
+                } else{
+                    alert(resp.message);
+                }
+            },
+            error: function(resp){
+                console.log('somethin went wrong');
+            }
+        });
+        }
+        return false
+    });
+</script>
+{% endblock scripts %}

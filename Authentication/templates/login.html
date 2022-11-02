@@ -9,6 +9,29 @@
 {% endblock meta %}
 
 {% block content %}
+<!-- NAVBAR -->
+<!-- <nav class="navbar navbar-expand-lg bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="{% url 'Home:show_home' %}">Irama Kain</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="#">Shop</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'faq:index' %}" >FaQ</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Partnership</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav> -->
+
 <script>
     $(document).ready(function(){
         var temp2 = '{{status}}'
@@ -35,6 +58,40 @@
         <div class = "login-box">
             <!-- <img src = "{% static 'PROMPT_FRAME.png' %}" id = 'prompt'> -->
         </div>
+      </div>
     </div>
+  </div>
 </div>
+
+<div class = 'container-fluid' id = 'container_footer'>
+  <div class = 'row row-cols-auto justify-content-center' style = 'font-family:Stratford;color: #7335C2;height: 70px; padding-top: 10px;' id = 'row1_footer'>
+    <div class = 'col-md-4' style = 'height: fit-content; width: 30px;'>
+      <button type = 'button' class = 'btn btn-link'><img src = "{% static '/authentication/img/facebook.png' %}" style = 'height: 20px; width: 20px;'></a>
+    </div>  
+    <div class = 'col-md-4' style = 'height: fit-content; width: 30px; margin-left: 20px;'>
+      <button type = 'button' class = 'btn btn-link'><img src = "{% static '/authentication/img/linked_in.png' %}" style = 'height: 20px; width: 20px;'></a>
+    </div>
+    <div class = 'col-md-4' style = 'height: fit-content; width: 30px; margin-left: 20px;'>
+      <button type = 'button' class = 'btn btn-link'><img src = "{% static '/authentication/img/twitter.png' %}" style = 'height: 20px; width: 20px;'></a>
+    </div>
+    <div class = 'col-md-4' style = 'height: fit-content; width: 30px; margin-left: 20px;'>
+      <button type = 'button' class = 'btn btn-link'><img src = "{% static '/authentication/img/amazon.png' %}" style = 'height: 20px; width: 20px;'></a>
+    </div>
+    <div class = 'col-md-4' style = 'height: fit-content; width: 30px; margin-left: 20px;'>
+      <button type = 'button' class = 'btn btn-link'><img src = "{% static '/authentication/img/instagram_baru.png' %}" style = 'height: 20px; width: 20px;'></a>
+    </div>
+  </div>
+  <div class = 'row row-cols-auto justify-content-center' id = 'row2_footer'>
+    <p style = 'margin-left: 40px;'>©️2022 Copyright: Irama Kain</p>
+  </div>
+</div>
+
+<script>
+  if (temp2 === 'admin'){
+    $("#card_title").append('<br>(admin)');
+  }
+  $('#registerLink').attr('href', redirectUrlRegister);
+  // $('#carouselControls').carousel();
+  // $('#carouselControls').carousel('pause');
+</script>
 {% endblock content %}
