@@ -16,7 +16,7 @@ class DonationInfo(models.Model):
    
     pengunjung = models.ForeignKey(Pengunjung, null = True, on_delete = models.CASCADE)
     waktu_isi = models.DateTimeField(default = now)
-    jenis_barang = models.CharField(max_length=255)
+    jenis_barang = models.CharField(max_length=255, verbose_name= "Jenis Kain")
     amount = models.IntegerField(verbose_name = "Banyak (dalam kg)")
     shipping_method = models.CharField(max_length = 255, choices = KURIR_CHOICES, default= KURIR_CHOICES[0], verbose_name= "Metode pengiriman")
     is_done = models.BooleanField(default = False)

@@ -2,131 +2,40 @@
 {% load static %}
 {% block meta %}
 <title>Authentication</title>
-<link rel="stylesheet" href="{% static '/authentication/css/register-style.css' %}">
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 {% endblock meta %}
 
 {% block content %}
 <script>
-    var csrf = '{{csrf_token}}';
-    var temp2 = '{{status}}';
-    var temp = "{% url 'Authentication:register-user' 1 %}".replace('1', temp2);
-    var redirectUrl = "{% url 'Authentication:login-user' 1 %}".replace('1', temp2);
+    $(document).ready(function(){
+        $('#button1').click(function(){
+            var temp2 = '{{status}}'
+            var temp = "{% url 'Authentication:register-user' 1 %}".replace('1', temp2)
+            $.ajax({
+                url: temp,
+                type: "POST",
+                data: {
+                    'csrfmiddlewaretoken': "{{ csrf_token }}",
+                    'username': $('#id_username').val(),
+                    'first_name': $('#id_first_name').val(),
+                    'last_name': $('#id_last_name').val(),
+                    'email':$('#id_email').val(),
+                    'password':$('#id_password').val(),
+                    'password2':$('#id_password2').val(),
+                    'jenis_kelamin':$('#id_jenis_kelamin').val(),
+                    'kontak':$('#id_kontak').val(),
+                    'alamat':$('#id_alamat').val()
+                },
+                success: function(data){
+                    alert(data)
+                }
+            });
+        });
+    });
 </script>
-<script type = "text/JavaScript" src = "{% static '/authentication/js/registerScript.js' %}"></script>
 
-<!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="{% url 'Home:show_home' %}">Irama Kain</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link" href="#">Shop</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="{% url 'faq:index' %}" >FaQ</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Partnership</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-</nav>
-
-<div class = 'd-flex flex-column min-vh-100 justify-content-center align-items-center' id = 'main_container'> 
-  <div class="card mb-3 shadow-lg" style="max-width: 1000px;" id = myCard>
-      <div class="row">
-        <div class="col justify-content-center">
-          <div class="card-body" id = 'card_body'>
-            <h3 class="card-title" id = 'card_title' style = 'font-family: Stratford; color: #7335C2;'>Create Account</h3>
-            <div class = 'form-group row'>
-              <label for = '#id_username'>{{auth.username.label}}</label>
-              {{auth.username}}
-            </div>
-            <div class = 'form-group row'>
-              <label for = '#id_email'>{{auth.email.label}}</label>
-              {{auth.email}}
-            </div>
-            <div class = 'form-group row'>
-              <div class = 'col'>
-                <label for = '#id_first_name'>{{auth.first_name.label}}</label>
-                {{auth.first_name}}
-              </div>
-              <div class = 'col'>
-                <label for = '#id_last_name'>{{auth.last_name.label}}</label>
-              {{auth.last_name}}
-              </div>
-            </div>
-            <div class = 'form-group row'>
-              <div class = 'col'>
-                <label for = '#id_password1'>{{auth.password1.label}}</label>
-                {{auth.password1}}
-              </div>
-              <div class = 'col'>
-                <label for = '#id_password2'>{{auth.password2.label}}</label>
-                {{auth.password2}}
-              </div>
-            </div>
-            <div class = 'form-group row'>
-              <div class = 'col'>
-                <label for = '#id_jenis_kelamin'>{{non_auth.jenis_kelamin.label}}</label>
-                {{non_auth.jenis_kelamin}}
-              </div>
-              <div class = 'col'>
-                <label for = '#id_kontak'>{{non_auth.kontak.label}}</label>
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text" id="basic-addon1">+62</span>
-                  </div>
-                  {{non_auth.kontak}}
-                </div>
-              </div>
-            </div>
-            <div class = 'form-group row'>
-              <label for = '#id_alamat'>{{non_auth.alamat.label}}</label>
-              {{non_auth.alamat}}
-            </div>
-            
-            <div class = 'form-check' style = 'margin-top: 20px;'>
-              <input class="form-check-input" type="checkbox" value="" id="flexCheck">
-              <label class="form-check-label" for="#flexCheck">
-                I agree all statements in Terms of service
-              </label>
-            </div>
-            <div class = 'form-group row justify-content-center'>
-              <button type = 'button' class = 'btn btn-outline-light' id = "submit_button">Register</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-</div>
-
-<div class = 'container-fluid' id = 'container_footer'>
-    <div class = 'row row-cols-auto justify-content-center' style = 'font-family:Stratford;color: #7335C2;height: 70px; padding-top: 10px;' id = 'row1_footer'>
-      <div class = 'col-md-4' style = 'height: fit-content; width: 30px;'>
-        <button type = 'button' class = 'btn btn-link'><img src = "{% static '/authentication/img/facebook.png' %}" style = 'height: 20px; width: 20px;'></a>
-      </div>  
-      <div class = 'col-md-4' style = 'height: fit-content; width: 30px; margin-left: 20px;'>
-        <button type = 'button' class = 'btn btn-link'><img src = "{% static '/authentication/img/linked_in.png' %}" style = 'height: 20px; width: 20px;'></a>
-      </div>
-      <div class = 'col-md-4' style = 'height: fit-content; width: 30px; margin-left: 20px;'>
-        <button type = 'button' class = 'btn btn-link'><img src = "{% static '/authentication/img/twitter.png' %}" style = 'height: 20px; width: 20px;'></a>
-      </div>
-      <div class = 'col-md-4' style = 'height: fit-content; width: 30px; margin-left: 20px;'>
-        <button type = 'button' class = 'btn btn-link'><img src = "{% static '/authentication/img/amazon.png' %}" style = 'height: 20px; width: 20px;'></a>
-      </div>
-      <div class = 'col-md-4' style = 'height: fit-content; width: 30px; margin-left: 20px;'>
-        <button type = 'button' class = 'btn btn-link'><img src = "{% static '/authentication/img/instagram_baru.png' %}" style = 'height: 20px; width: 20px;'></a>
-      </div>
-    </div>
-    <div class = 'row row-cols-auto justify-content-center' id = 'row2_footer'>
-      <p style = 'margin-left: 40px;'>©️2022 Copyright: Irama Kain</p>
-    </div>
-</div>
+<table>
+    {{auth.as_table}}
+    {{non_auth.as_table}}
+</table>
+<button type = "button" id = 'button1'>Submit</button>
 {% endblock content %}

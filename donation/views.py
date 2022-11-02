@@ -11,6 +11,7 @@ from donation.models import DonationInfo
 # TODO:implement views
 @login_required(login_url='../Authentication/login/<str:status>/')
 def form_donation(request):
+    data_pengunjung = Pengunjung.objects.get(user=request.user)
     form = DonationForm()
     if (request.method == 'POST'):
         form = DonationForm(request.POST)
@@ -23,6 +24,8 @@ def form_donation(request):
 
     context = {
         'form' : form,
+        'poin' : data_pengunjung.poin
+
     }
     return render(request, "donationForm.html", context)
 
