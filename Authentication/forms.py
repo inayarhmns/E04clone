@@ -10,17 +10,47 @@ class NonAuthForm(forms.ModelForm):
         fields = [
             'jenis_kelamin', 'kontak', 'alamat'
         ]
+        labels = {
+            'jenis_kelamin': 'Gender',
+            'kontak': 'Contact',
+            'alamat': 'Address'
+        }
         widgets = {
             'jenis_kelamin': forms.Select(attrs = {
-                'id': 'id_jenis_kelamin'
+                'id': 'id_jenis_kelamin',
+                'class': 'form-select'
             }),
             'kontak': forms.TextInput(attrs = {
-                'id': 'id_kontak'
+                'id': 'id_kontak',
+                'class': 'form-control',
+                'aria-describedby': 'basic-addon1'
             }),
             'alamat': forms.TextInput(attrs = {
-                'id': 'id_alamat'
+                'id': 'id_alamat',
+                'class': 'form-control'
             })
         }
+
+    def clean_kontak(self):
+        kontak = self.cleaned_data['kontak']
+        status = True
+        for i in kontak:
+            if not i.isdigit():
+                status = False
+                break
+        if len(kontak) == 0:
+            raise ValidationError("Contact Cannot Be Emptied")
+        if not status:
+            raise ValidationError("Contact Input Invalid")
+        return kontak
+    
+    def clean_alamat(self):
+        alamat = self.cleaned_data['alamat']
+        if len(alamat) == 0:
+            raise ValidationError("Address Cannot Be Emptied")
+        return alamat
+
+    
 
 class ProfileForm(UserCreationForm):
     email = forms.EmailField(widget=forms.EmailInput(attrs = {'id':'id_email'}))
@@ -30,17 +60,40 @@ class ProfileForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('username', 'first_name', 'last_name', 'email', 'password1', 'password2')
-        widgets = {
-            'username': forms.TextInput(attrs = {
-                'id': 'id_username'
-            }),
-            'password1': forms.PasswordInput(attrs = {
-                'id': 'id_password1'
-            }),
-            'password2': forms.PasswordInput(attrs = {
-                'id': 'id_password2'
-            }),  
-        }   
+    
+    def __init__(self, *args, **kwargs):
+        super(ProfileForm, self).__init__(*args, **kwargs)
+
+        self.fields['username'].widget.attrs = {
+            'id': 'id_username',
+            'class': 'form-control input-md',
+            'placeholder': self.fields['username'].help_text
+        }
+        self.fields['password1'].widget.attrs = {
+            'id': 'id_password1',
+            'class': 'form-control',
+            'placeholder': 'Type your password'
+        }
+        self.fields['password2'].widget.attrs = {
+            'id': 'id_password2',
+            'class': 'form-control',
+            'placeholder': 'Re-type your password'
+        }
+        self.fields['first_name'].widget.attrs = {
+            'id': 'id_first_name',
+            'class': 'form-control'
+        }
+        self.fields['last_name'].widget.attrs = {
+            'id': 'id_last_name',
+            'class': 'form-control'
+        }
+        self.fields['email'].widget.attrs = {
+            'id': 'id_email',
+            'class': 'form-control input-lg',
+            'aria-describedby': 'emailHelp',
+            'required': 'required',
+            'placeholder': 'example: john@gmail.com'
+        }
     
     def clean_email(self):
         email = self.cleaned_data['email'].lower()

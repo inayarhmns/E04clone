@@ -24,6 +24,7 @@ urlpatterns = [
     path('profile/', include('profilePage.urls')),
     path('donation/', include('donation.urls')),
     path('marketplace/', include('marketplace.urls')),
+    path('partnership/', include('partnership.urls')),
 ]
 
 # TODO: Implement Routings Here
