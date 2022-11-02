@@ -1,0 +1,86 @@
+/* NAVBAR */
+.donationhistory    {
+    display: block;
+}
+.nav-link  {
+    font-family: 'Test Söhne';
+    font-style: normal;
+    font-weight: 550;
+    font-size: 18px;
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+    /* iramakain/color 1 */
+    color: #3C3C3C;
+}
+.navbar-brand   {
+font-family: 'Stratford';
+font-style: normal;
+font-weight: 400;
+font-size: 26px;
+line-height: 34px;
+letter-spacing: 0.08em;
+margin-bottom: 10px;
+/* iramakain/color 3 */
+color: #7335C2;
+
+}
+.nav-item   {
+        margin-left: 20px;
+}
+.nav-link:hover {
+    color: #7335C2;
+}
+.navbar {
+    position: sticky;
+    top: 0px;
+    width: 100%;
+    z-index: 100;
+}
+/* END NAVBAR */
+body{
+    background-color: #f3f3f3;
+    color: #7335C2;
+}
+
+.startford{
+    font-family: startford;
+}
+
+.menu{
+    color: #7335C2;
+    text-decoration: none;
+    font-family: helvetica;
+}
+
+.explore{
+    border: #7335C2 1px solid;
+    color: #7335C2;
+    border-radius: 200px;
+    width: 150px;
+    height: 50px; 
+    font-size: 20px;
+}
+
+.explore:hover{
+    border: #7335C2 1px solid;
+    color: #f3f3f3;
+    background-color: #7335C2;
+}
+
+.header-img{
+    font-size: 60px;
+}
+
+.helvetica{
+    font-family: helvetica;
+    font-weight: 100;
+    font-size: 20px;
+}
+
+.text-img{
+    font-family: helvetica;
+}
+
+.footer{
+    font-weight: 400;
+}

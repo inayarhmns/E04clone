@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'faq',
     'profilePage',
     'donation',
+    'marketplace',
     'partnership',
 
 ]
