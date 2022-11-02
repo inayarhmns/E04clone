@@ -53,3 +53,13 @@ color: #7335C2;
 #row1_footer, #row2_footer{
     background-color: #f3f3f3;
 }
+
+.form-group{
+    margin-top: 10px;
+}
+
+label{
+    display: flex;
+    justify-self: left;
+    align-items: flex-start;
+}

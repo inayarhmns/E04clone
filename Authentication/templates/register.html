@@ -38,20 +38,71 @@
     </div>
 </nav>
 
-<table>
-    {{auth.as_table}}
-    {{non_auth.as_table}}
-</table>
-<button type = "button" id = 'button1'>Submit</button>
+<div class = 'd-flex flex-column min-vh-100 justify-content-center align-items-center' id = 'main_container'> 
+  <div class="card mb-3 shadow-lg" style="max-width: 1000px;" id = myCard>
+      <div class="row">
+        <div class="col justify-content-center">
+          <div class="card-body" id = 'card_body'>
+            <h3 class="card-title" id = 'card_title' style = 'font-family: Stratford; color: #7335C2;'>Create Account</h3>
+            <div class = 'form-group row'>
+              <label for = '#id_username'>{{auth.username.label}}</label>
+              {{auth.username}}
+            </div>
+            <div class = 'form-group row'>
+              <label for = '#id_email'>{{auth.email.label}}</label>
+              {{auth.email}}
+            </div>
+            <div class = 'form-group row'>
+              <div class = 'col'>
+                <label for = '#id_first_name'>{{auth.first_name.label}}</label>
+                {{auth.first_name}}
+              </div>
+              <div class = 'col'>
+                <label for = '#id_last_name'>{{auth.last_name.label}}</label>
+              {{auth.last_name}}
+              </div>
+            </div>
+            <div class = 'form-group row'>
+              <div class = 'col'>
+                <label for = '#id_password1'>{{auth.password1.label}}</label>
+                {{auth.password1}}
+              </div>
+              <div class = 'col'>
+                <label for = '#id_password2'>{{auth.password2.label}}</label>
+                {{auth.password2}}
+              </div>
+            </div>
+            <div class = 'form-group row'>
+              <div class = 'col'>
+                <label for = '#id_jenis_kelamin'>{{non_auth.jenis_kelamin.label}}</label>
+                {{non_auth.jenis_kelamin}}
+              </div>
+              <div class = 'col'>
+                <label for = '#id_kontak'>{{non_auth.kontak.label}}</label>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon1">+62</span>
+                  </div>
+                  {{non_auth.kontak}}
+                </div>
+              </div>
+            </div>
+
+              
+            <div class = 'form-group row'>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
 
 <div class = 'container-fluid' id = 'container_footer'>
     <div class = 'row row-cols-auto justify-content-center' style = 'font-family:Stratford;color: #7335C2;height: 70px; padding-top: 10px;' id = 'row1_footer'>
       <div class = 'col-md-4' style = 'height: fit-content; width: 30px;'>
         <button type = 'button' class = 'btn btn-link'><img src = "{% static '/authentication/img/facebook.png' %}" style = 'height: 20px; width: 20px;'></a>
       </div>  
-      <div class = 'col-md-4' style = 'height: fit-content; width: 30px; margin-left: 20px;'>
-        <button type = 'button' class = 'btn btn-link'><img src = "{% static '/authentication/img/instagram.png' %}" style = 'height: 20px; width: 20px;'></a>
-      </div>
       <div class = 'col-md-4' style = 'height: fit-content; width: 30px; margin-left: 20px;'>
         <button type = 'button' class = 'btn btn-link'><img src = "{% static '/authentication/img/linked_in.png' %}" style = 'height: 20px; width: 20px;'></a>
       </div>
@@ -60,6 +111,9 @@
       </div>
       <div class = 'col-md-4' style = 'height: fit-content; width: 30px; margin-left: 20px;'>
         <button type = 'button' class = 'btn btn-link'><img src = "{% static '/authentication/img/amazon.png' %}" style = 'height: 20px; width: 20px;'></a>
+      </div>
+      <div class = 'col-md-4' style = 'height: fit-content; width: 30px; margin-left: 20px;'>
+        <button type = 'button' class = 'btn btn-link'><img src = "{% static '/authentication/img/instagram_baru.png' %}" style = 'height: 20px; width: 20px;'></a>
       </div>
     </div>
     <div class = 'row row-cols-auto justify-content-center' id = 'row2_footer'>
