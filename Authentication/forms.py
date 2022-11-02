@@ -10,12 +10,20 @@ class NonAuthForm(forms.ModelForm):
         fields = [
             'jenis_kelamin', 'kontak', 'alamat'
         ]
+        labels = {
+            'jenis_kelamin': 'Gender',
+            'kontak': 'Contact',
+            'alamat': 'Address'
+        }
         widgets = {
             'jenis_kelamin': forms.Select(attrs = {
-                'id': 'id_jenis_kelamin'
+                'id': 'id_jenis_kelamin',
+                'class': 'form-select'
             }),
             'kontak': forms.TextInput(attrs = {
-                'id': 'id_kontak'
+                'id': 'id_kontak',
+                'class': 'form-control',
+                'aria-describedby': 'basic-addon1'
             }),
             'alamat': forms.TextInput(attrs = {
                 'id': 'id_alamat'
@@ -36,15 +44,18 @@ class ProfileForm(UserCreationForm):
 
         self.fields['username'].widget.attrs = {
             'id': 'id_username',
-            'class': 'form-control',
+            'class': 'form-control input-md',
+            'placeholder': self.fields['username'].help_text
         }
         self.fields['password1'].widget.attrs = {
             'id': 'id_password1',
-            'class': 'form-control'
+            'class': 'form-control',
+            'placeholder': 'Type your password'
         }
         self.fields['password2'].widget.attrs = {
             'id': 'id_password2',
-            'class': 'form-control'
+            'class': 'form-control',
+            'placeholder': 'Re-type your password'
         }
         self.fields['first_name'].widget.attrs = {
             'id': 'id_first_name',
@@ -56,7 +67,7 @@ class ProfileForm(UserCreationForm):
         }
         self.fields['email'].widget.attrs = {
             'id': 'id_email',
-            'class': 'form-control',
+            'class': 'form-control input-lg',
             'aria-describedby': 'emailHelp',
             'required': 'required',
             'placeholder': 'example: john@gmail.com'
