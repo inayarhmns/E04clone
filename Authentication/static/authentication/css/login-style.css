@@ -55,7 +55,8 @@ color: #7335C2;
 }
 
 @media all and (max-width: 800px) {
-    #card_image_col {
+    #card_image_col, #card_image_col_2 {
         display: none;
     }
+    
 }

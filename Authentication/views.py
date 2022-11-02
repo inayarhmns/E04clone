@@ -39,7 +39,8 @@ def register_user(request, status):
                     profile.save()
                     return HttpResponse('Account has successfully created !')
                 else:
-                    return HttpResponse('Account couldn\'t be created !')
+                    one = list(non_auth.errors.values())[0]
+                    return HttpResponse(one)
             else:
                 one = list(auth.errors.values())[0]
                 return HttpResponse(one)

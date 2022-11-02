@@ -26,9 +26,31 @@ class NonAuthForm(forms.ModelForm):
                 'aria-describedby': 'basic-addon1'
             }),
             'alamat': forms.TextInput(attrs = {
-                'id': 'id_alamat'
+                'id': 'id_alamat',
+                'class': 'form-control'
             })
         }
+
+    def clean_kontak(self):
+        kontak = self.cleaned_data['kontak']
+        status = True
+        for i in kontak:
+            if not i.isdigit():
+                status = False
+                break
+        if len(kontak) == 0:
+            raise ValidationError("Contact Cannot Be Emptied")
+        if not status:
+            raise ValidationError("Contact Input Invalid")
+        return kontak
+    
+    def clean_alamat(self):
+        alamat = self.cleaned_data['alamat']
+        if len(alamat) == 0:
+            raise ValidationError("Address Cannot Be Emptied")
+        return alamat
+
+    
 
 class ProfileForm(UserCreationForm):
     email = forms.EmailField(widget=forms.EmailInput(attrs = {'id':'id_email'}))
@@ -72,8 +94,6 @@ class ProfileForm(UserCreationForm):
             'required': 'required',
             'placeholder': 'example: john@gmail.com'
         }
-
-
     
     def clean_email(self):
         email = self.cleaned_data['email'].lower()

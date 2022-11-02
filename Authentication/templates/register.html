@@ -11,7 +11,7 @@
     var csrf = '{{csrf_token}}';
     var temp2 = '{{status}}';
     var temp = "{% url 'Authentication:register-user' 1 %}".replace('1', temp2);
-    var redirectUrl = "{% url 'Home:show_home' %}";
+    var redirectUrl = "{% url 'Authentication:login-user' 1 %}".replace('1', temp2);
 </script>
 <script type = "text/JavaScript" src = "{% static '/authentication/js/registerScript.js' %}"></script>
 
@@ -87,10 +87,13 @@
                 </div>
               </div>
             </div>
-
-              
             <div class = 'form-group row'>
+              <label for = '#id_alamat'>{{non_auth.alamat.label}}</label>
+              {{non_auth.alamat}}
+            </div>
               
+            <div class = 'form-group row justify-content-center'>
+              <button type = 'button' class = 'btn btn-outline-light' id = "submit_button">Register</button>
             </div>
           </div>
         </div>

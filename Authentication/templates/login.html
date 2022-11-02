@@ -45,33 +45,57 @@
 
 <script type="text/JavaScript" src="{% static '/authentication/js/loginScript.js' %}"></script>
 
-<div class = 'd-flex flex-column min-vh-100 justify-content-center align-items-center' id = 'main_container'> 
-    <div class="card mb-3 shadow-lg" style="max-width: 700px;" id = myCard>
-        <div class="row g-0">
-          <div class="col-md-4" id = 'card_image_col'>
-            <img src="{% static '/authentication/img/irama_kain.png' %}" class="img-fluid rounded-start" id = 'card_image'>
-          </div>
-          <div class="col-md-8">
-            <div class="card-body" id = 'card_body'>
-              <h1 class="card-title" id = 'card_title' style = 'font-family: Stratford; color: #7335C2;'>Irama Kain</h1>
-              <form id = 'form-login'>
-                <div class="mb-3">
-                  <label for="id_email" class="form-label">Email address</label>
-                  {{auth.email}}
-                  <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+<div id="carouselControls" class="carousel slide" data-bs-interval="false">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <div class = 'd-flex flex-column min-vh-100 justify-content-center align-items-center' id = 'main_container'> 
+        <div class="card mb-3 shadow-lg" id = myCard>
+            <div class="row g-0">
+              <div class="col-md-4" id = 'card_image_col'>
+                <img src="{% static '/authentication/img/irama_kain.png' %}" class="img-fluid rounded-start" id = 'card_image'>
+              </div>
+              <div class="col-md-8">
+                <div class="card-body" id = 'card_body'>
+                  <h1 class="card-title" id = 'card_title' style = 'font-family: Stratford; color: #7335C2;'>Irama Kain</h1>
+                  <form id = 'form-login'>
+                    <div class="mb-3">
+                      <label for="id_email" class="form-label">Email address</label>
+                      {{auth.email}}
+                      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+                    </div>
+                    <div class="mb-3">
+                      <label for="id_password" class="form-label">Password</label>
+                      {{auth.password}}
+                    </div>
+                    <label for = '#registerLink'>Don't have an account?</label>
+                    <a href = '#'  id = "registerLink">register<br></a>
+                    <button type="button" class="btn btn-outline-light" id = 'submit_button'>Login</button>
+                  </form>
                 </div>
-                <div class="mb-3">
-                  <label for="id_password" class="form-label">Password</label>
-                  {{auth.password}}
-                </div>
-                <label for = '#registerLink'>Don't have an account?</label>
-                <a href = '#'  id = "registerLink">register<br></a>
-                <button type="button" class="btn btn-outline-light" id = 'submit_button'>Login</button>
-              </form>
+              </div>
             </div>
           </div>
         </div>
+    </div>
+    <div class="carousel-item">
+      <div id = "next-item">
+        <div class = 'd-flex flex-column min-vh-100 justify-content-center align-items-center' id = 'main_container_2'> 
+          <div class="card mb-3 shadow-lg" id = myCard_2>
+              <div class="row g-0">
+                <div class="col-md-4" id = 'card_image_col_2'>
+                  <img src="{% static '/authentication/img/irama_kain.png' %}" class="img-fluid rounded-start" id = 'card_image_2'>
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body" id = 'card_body_2'>
+                    <h1 class="card-title" id = 'card_title_2' style = 'font-family: Stratford; color: #7335C2;'></h1>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
       </div>
+    </div>
+  </div>
 </div>
 
 <div class = 'container-fluid' id = 'container_footer'>
@@ -102,5 +126,7 @@
     $("#card_title").append('<br>(admin)');
   }
   $('#registerLink').attr('href', redirectUrlRegister);
+  // $('#carouselControls').carousel();
+  // $('#carouselControls').carousel('pause');
 </script>
 {% endblock content %}
