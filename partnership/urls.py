@@ -1,8 +1,9 @@
 from django.urls import path
-from partnership.views import show_partnership
+from partnership.views import CommentView, CommentDataView
 
 app_name = 'partnership'
 
 urlpatterns = [
-    path('', show_partnership, name='show_partnership'),
+    path('', CommentView.as_view(), name="comment"),
+    path('view', CommentDataView.as_view(), name="comment_data")
 ]
