@@ -151,7 +151,7 @@
                     <a class="nav-link" href="{% url 'faq:index' %}" >F.A.Q</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link" href='{% url "partnership:show_partnership"  %}' >Contact Us</a>
+                    <a class="nav-link" href='{% url "partnership:comment"  %}' >Contact Us</a>
                   </li>
                   <li class="nav-item" id="linkprofile">
                     <a class="nav-link" href="{% url 'profilePage:lihatProfile' %}">Profile</a>
@@ -343,11 +343,12 @@
                         console.log(poin)
                         console.log(is_auth)
                         if (is_auth)    {
-                        document.getElementById('linkpoin').style.display = "inline";
+                        $('#linkpoin').show()
                         $('#linkpoin').html(poin)
-                        document.getElementById('linkprofile').style.display = "inline";
+                        $('#linkprofile').show()
                         $('#linksignout').html("Sign Out")
                         var oldUrl = $('#linksignout').attr("href")
+                        console.log(oldUrl)
                         var newUrl = oldUrl.replace('login-user', 'logout-user')
                         $('#linksignout').attr("href", newUrl)
                         console.log("ada user ga" + is_auth)
@@ -355,8 +356,8 @@
                         console.log("berhasil ada user")
                     }
                     else    {
-                        document.getElementById('linkprofile').style.display = "none";
-                        document.getElementById('linkpoin').style.display = "none";
+                        $('#linkprofile').hide()
+                        $('#linkpoin').hide()
                         $('#linksignout').html("Sign In")
                         var oldUrl = $('#linksignout').attr("href")
                         var newUrl = oldUrl.replace('logout-user', 'login-user')
