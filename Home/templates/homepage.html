@@ -19,14 +19,14 @@
     display: block;
     }
 
-    p {
+    p, a {
         font-family: 'Helvetica';
         font-style: normal;
         letter-spacing: 0.05em;
         color: #3C3C3C;
     }
 
-    h4, h5 {
+    h4, h5, h6 {
         font-family: 'Stratford';
         font-style: normal;
         letter-spacing: 0.05em;
@@ -77,7 +77,8 @@
         top: 0px;
         width: 100%;
         z-index: 100;
-        background-color: #F3F3F3;
+        background: #F3F3F3;
+        background: linear-gradient(0deg, transparent 0%, #AAC38A 80%);;
     }
     
     .carousel-item img {
@@ -243,6 +244,53 @@
                 </div>
             </div>
         </div>
+
+        <footer class = "text-center text-lg-start pt-4" style = "background: #F3F3F3;
+        background: linear-gradient(0deg, #AAC38A 0%, #F3F3F3 80%);">
+            <section class = "">
+                <div class = "container text-center text-md-start mt-5">
+                    <div class = "row mt-3">
+                        <div class="col-md-3 col-lg-4 col-xl-3 ms-5 mb-4" ALIGN = left>
+                            <img src="../../static/iramakain.png" height="83px" width="150px" alt="test">
+                            <hr>
+                            <h6>
+                                The era of fashion revolution, The era of sustainable garments.
+                            </h6>
+                        </div>
+                        <div class="col-md-4 col-lg-2 col-xl-2 ms-5 mb-4">
+                            <h6 class="text-uppercase fw-bold mb-4">
+                                Explore
+                                </h6>
+                                <p>
+                                <a href="{% url 'faq:index' %}" class=" footer-text">F.A.Q</a>
+                                </p>
+                                <p>
+                                <a href="{% url 'donation:show-donation' %}" class=" footer-text">Shop</a>
+                                </p>
+                                <p>
+                                <a href="#" class="footer-text">Donate</a>
+                                </p>
+                                <p>
+                                    <a href="#" class="footer-text">Contact Us</a>
+                                </p>
+                        </div>
+                        <div class="col-md-8 col-lg-3 col-xl-3 ms-auto mb-md-0 mb-4">
+                            <!-- Links -->
+                            <h6 class="text-uppercase fw-bold mb-4">Our Office</h6>
+                            <p><i class="fas fa-home"></i> Fakultas Ilmu Komputer, Universitas Indonesia, Kota Depok, Jawa Barat 16425</p>
+                            <p>
+                            <i class="fas fa-envelope"></i>
+                            cs.ui.ac.id
+                            </p>
+                            <p><i class="fas fa-phone"></i>  (021) 7863419</p>
+                        </div>
+                        <div class = 'row row-cols-auto justify-content-center' id = 'row2_footer'>
+                            <h6 style = 'margin-left: 40px; margin-bottom: 40px;'>©️ 2022 Copyright: Irama Kain</h6>
+                          </div>
+                    </div>
+                </div>
+            </section>
+        </footer>
     </main>
 
 </html>
