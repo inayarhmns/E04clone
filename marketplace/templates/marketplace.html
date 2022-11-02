@@ -16,7 +16,6 @@
       $(document).ready(function(){
       var tipe = ""
       $("#confirmButton").click(function(){
-      alert("hello")
       $.ajax({
         url: "{% url 'marketplace:show_marketplace' %}", 
         type: "POST",
