@@ -100,16 +100,16 @@
                             <input type="text" required>
                             <span>Phone Number</span>
                         </div>
+                        <span>Message</span>
                         <div class="inputBox w100">
-                            <form action="formComment" aria-roledescription="{% url 'comments:comment' %}" autocomplete="off">
+                            <form action="formComment" aria-roledescription="{% url 'partnership:comment' %}" autocomplete="off">
                                 {% csrf_token %}
                                 <div class="row">
                                     <div class="col 12">
                                         <div class="form-group validate">
                                             <textarea class="form-control" name="comment"></textarea>
-                                            <span>Message</span>
                                         </div>
-                                    </div>
+                                    </div>                   
                                 </div>
                             </form>
                         </div>
@@ -127,6 +127,7 @@
                      <tr>
                         <th>message.pesanUser</th>
                      </tr>
+                    {% endfor %}
                 </div>
             </div>
             
