@@ -3,7 +3,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class DataPartner(models.Model):
-    user = models.ForeignKey(to=User, on_delete=models.CASCADE)
+    user = models.ForeignKey(to=User, on_delete=models.CASCADE, default = None)
     nama_depan = models.TextField()
     nama_belakang = models.TextField()
     email_user = models.EmailField()
