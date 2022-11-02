@@ -1,5 +1,6 @@
 console.log("eksternal js kebaca")
 refresh()
+firstTime();
 scroll()
 function scroll()   {
         $("html, body").animate({scrollTop: "620px" }, 2000);
@@ -167,3 +168,46 @@ function selesai_donasi(pk2){
         });
         };
     }
+    
+        function firstTime()    {
+            var url = "/jsoninfo/"
+            const formData = {
+                csrfmiddlewaretoken: '{{csrf_token}}'
+            };
+            {
+                $.ajax({
+                type: 'POST',
+                url: url,
+                data: formData,
+                success: function(response) {
+                    console.log("kebaca")
+                    var poin = response.poin
+                    var is_auth = response.is_auth
+                    console.log(poin)
+                    console.log(is_auth)
+                    if (is_auth)    {
+                    $('#linkpoin').show()
+                    $('#linkpoin').html(poin)
+                    $('#linkprofile').show()
+                    $('#linksignout').html("Sign Out")
+                    var oldUrl = $('#linksignout').attr("href")
+                    console.log(oldUrl)
+                    var newUrl = oldUrl.replace('login-user', 'logout-user')
+                    $('#linksignout').attr("href", newUrl)
+                    console.log("ada user ga" + is_auth)
+                    console.log("poin : " + poin)
+                    console.log("berhasil ada user")
+                }
+                else    {
+                    $('#linkprofile').hide()
+                    $('#linkpoin').hide()
+                    $('#linksignout').html("Sign In")
+                    var oldUrl = $('#linksignout').attr("href")
+                    var newUrl = oldUrl.replace('logout-user', 'login-user')
+                    $('#linksignout').attr("href", newUrl)
+                    console.log("berhasil ga ada user")
+                }            
+                }
+                })
+                };
+        }
