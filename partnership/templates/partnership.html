@@ -101,8 +101,17 @@
                             <span>Phone Number</span>
                         </div>
                         <div class="inputBox w100">
-                            <textarea required></textarea>
-                            <span>Message</span>
+                            <form action="formComment" aria-roledescription="{% url 'comments:comment' %}" autocomplete="off">
+                                {% csrf_token %}
+                                <div class="row">
+                                    <div class="col 12">
+                                        <div class="form-group validate">
+                                            <textarea class="form-control" name="comment"></textarea>
+                                            <span>Message</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                         <div class="inputBox w100">
                             <input type="submit" value="Send">
@@ -113,7 +122,11 @@
 
             <div class="container2">
                 <div class="messageUser">
-                    <h2>Send us a Message</h2>
+                    <h2>Your Message</h2>
+                    {% for message in messageUser %}
+                     <tr>
+                        <th>message.pesanUser</th>
+                     </tr>
                 </div>
             </div>
             
@@ -121,4 +134,45 @@
         </section>
     </body>
 </html>
+
 {% endblock content %}
+
+{% block scripts %}
+<script>
+    $("formComment").on("submit", function(e){
+        e.preventDefault();
+        e.stopPropagation();
+        var $this = $(this);
+        var valid = true;
+        $('#formComment textarea').each(function(){
+            let $this = $(this)
+
+            if(!$this.val()){
+                valid = false;
+                $this.parents('.validate').find('.mySpan').text('The '+$this.attr('name').replace(/[\_]+/g, ' '))
+            }
+        });
+
+        if(valid){
+            $(".btnSave").text('Saving...').attr('disabled',true);
+            let data = $this.serialize();
+        ajax({
+            url: $this.attr('action'),
+            type: "POST",
+            dataType: 'json',
+            success: function(resp){
+                if(resp.message === 'success'){
+                    alert('success')
+                } else{
+                    alert(resp.message);
+                }
+            },
+            error: function(resp){
+                console.log('somethin went wrong');
+            }
+        });
+        }
+        return false
+    });
+</script>
+{% endblock scripts %}
