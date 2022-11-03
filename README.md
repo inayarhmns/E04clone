@@ -9,7 +9,7 @@ Pemrograman Berbasis Platform (CSGE602022) - diselenggarakan oleh Fakultas Ilmu 
 4. Inaya Rahmanisa (2106708330) 
 5. Hikam Fajduani (2106634250)
 
-[App Link](https://iramakain.herokuapp.com/)
+[App Link](https://irama-kain.herokuapp.com/)
 
 ## About
 ### Our Focus: Clothes Donation & Reworked (Sustainability)
