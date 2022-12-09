@@ -1,5 +1,5 @@
 from django.urls import path, include
-from Authentication.views import login_user, register_user, logout_user, get_pengunjung, login_flutter
+from Authentication.views import login_user, register_user, logout_user, get_pengunjung, login_flutter, logout_flutter
 
 app_name = 'Authentication'
 
@@ -9,4 +9,5 @@ urlpatterns = [
     path('logout/', logout_user, name = 'logout-user'),
     path('json/', get_pengunjung, name = 'json'),
     path('login_flutter', login_flutter, name = 'login_flutter'),
+    path('logout_flutter', logout_flutter, name = logout_flutter),
 ]

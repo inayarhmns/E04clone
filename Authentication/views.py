@@ -132,3 +132,12 @@ def login_flutter(request):
            "status": False,
            "message": "Failed to Login, check your email/password."
          }, status=401)
+
+
+def logout_flutter(request):
+    logout(request)
+    return JsonResponse({
+        "status": True,
+        "message": "Successfully Logged Out!"
+        # Insert any extra data if you want to pass data to Flutter
+        }, status=200)
