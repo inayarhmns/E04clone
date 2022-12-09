@@ -133,7 +133,7 @@ def login_flutter(request):
            "message": "Failed to Login, check your email/password."
          }, status=401)
 
-
+@csrf_exempt
 def logout_flutter(request):
     logout(request)
     return JsonResponse({
