@@ -15,10 +15,7 @@ def index(request):
         'faqs': faqs,
         'form': form
     }
-    if request.user.is_authenticated:
-        return render(request, 'faq_loggedin.html', response)
-    else:
-        return render(request, 'faq.html', response)
+    return render(request, 'faq.html', response)
 
 def create_question(request):
     data = dict()
