@@ -117,8 +117,6 @@ def login_flutter(request):
         user = authenticate(request, username = temp.get_username(), password = password)
         if user is not None:
             login(request, user)
-            response = HttpResponse('Login Success')
-            response.set_cookie('last_login', str(datetime.datetime.now()))
             return JsonResponse({
                "status": True,
                "message": "Successfully Logged In!"
