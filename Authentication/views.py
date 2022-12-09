@@ -107,5 +107,28 @@ def get_pengunjung(request):
     }
     return JsonResponse(load, safe = False)
 
-
-    
+def login_flutter(request):
+    email = request.POST.get('email')
+    password = request.POST.get('password')
+    try:
+        temp = User.objects.get(email = email)
+        user = authenticate(request, username = temp.get_username(), password = password)
+        if user is not None:
+            login(request, user)
+            response = HttpResponse('Login Success')
+            response.set_cookie('last_login', str(datetime.datetime.now()))
+            return JsonResponse({
+               "status": True,
+               "message": "Successfully Logged In!"
+               # Insert any extra data if you want to pass data to Flutter
+             }, status=200)
+        else:
+            return JsonResponse({
+               "status": False,
+               "message": "Failed to Login, Account Disabled."
+             }, status=401)
+    except:
+        return JsonResponse({
+           "status": False,
+           "message": "Failed to Login, check your email/password."
+         }, status=401)
