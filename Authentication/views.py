@@ -8,6 +8,7 @@ from django.db import transaction
 from django.contrib.auth.models import User
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 # Create your views here.
 
 @transaction.atomic
@@ -107,6 +108,7 @@ def get_pengunjung(request):
     }
     return JsonResponse(load, safe = False)
 
+@csrf_exempt
 def login_flutter(request):
     email = request.POST.get('email')
     password = request.POST.get('password')
