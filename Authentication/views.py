@@ -141,3 +141,50 @@ def logout_flutter(request):
         "message": "Successfully Logged Out!"
         # Insert any extra data if you want to pass data to Flutter
         }, status=200)
+
+@csrf_exempt
+def register_flutter(request):
+    if request.method == "POST":
+        auth = ProfileForm({
+                    'username':request.POST.get('username'),
+                    'first_name':request.POST.get('first_name').upper(),
+                    'last_name':request.POST.get('last_name').upper(),
+                    'email':request.POST.get('email'),
+                    'password1':request.POST.get('password1'),
+                    'password2':request.POST.get('password2')
+                })  
+
+        if auth.is_valid():
+            user = auth.save(commit = False)
+            user.set_password(request.POST.get('password1'))
+            non_auth = NonAuthForm({
+                'jenis_kelamin':request.POST.get('jenis_kelamin'),
+                'kontak':request.POST.get('kontak'),
+                'alamat':request.POST.get('alamat')
+            })
+            if non_auth.is_valid():
+                profile = non_auth.save(commit = False)
+                profile.user = user
+                user.save()
+                profile.save()
+                return JsonResponse({
+                "status": True,
+                "message": "Account has successfully created !"
+                }, status=200)
+            else:
+                one = list(non_auth.errors.values())[0]
+                return JsonResponse({
+                "status": False,
+                "message": one
+                }, status=401)
+        else:
+            one = list(auth.errors.values())[0]
+            return JsonResponse({
+                "status": False,
+                "message": one
+                }, status=401)
+    else:
+        return JsonResponse({
+                "status": False,
+                "message": "401 Error"
+                }, status=401)
