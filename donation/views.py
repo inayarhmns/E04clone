@@ -115,7 +115,10 @@ def edit_flutter(request, id):
         data.save()
         # print(data)
         print(DonationInfo.objects.filter(pk=id).values())
-        return JsonResponse(b"CREATED", status=201)
+        return JsonResponse({
+                "status": True,
+                "message": "Successfully edited donation"
+                }, status=200)
     return JsonResponse({
                 "status": False,
                 "message": "401 Error"
@@ -141,7 +144,10 @@ def form_flutter(request):
             'poin' : data_pengunjung.poin
 
         }
-        return JsonResponse(b"CREATED", status=201)
+        return JsonResponse({
+                "status": True,
+                "message": "Successfully added donation"
+                }, status=200)
     else:
         return JsonResponse({
                 "status": False,
