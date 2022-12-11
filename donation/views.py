@@ -94,3 +94,49 @@ def show_donation(request):
     else:
         return render(request, "notauth.html")
 
+@login_required(login_url='../Authentication/login/<str:status>/')
+def edit_flutter(request, id):
+    print(id)
+    if request.method == 'POST':
+        jenis_barang = request.POST.get("jenis_barang")
+        waktu_isi = now()
+        amount = request.POST.get("amount")
+        shipping_method = request.POST.get("shipping_method")
+        data = DonationInfo.objects.get(pk=id)
+        data.jenis_barang = jenis_barang
+        data.amount = amount
+        data.waktu_isi = waktu_isi
+        data.shipping_method = shipping_method
+        data.save()
+        # print(data)
+        print(DonationInfo.objects.filter(pk=id).values())
+        return JsonResponse(b"CREATED", status=201)
+    return JsonResponse({
+                "status": False,
+                "message": "401 Error"
+                }, status=401)
+
+def form_flutter(request):
+    if request.user.is_authenticated:
+        data_pengunjung = Pengunjung.objects.get(user=request.user)
+        form = DonationForm()
+        if (request.method == 'POST'):
+            form = DonationForm(request.POST)
+            if form.is_valid():
+                temp = form.save(commit=False)
+                print(request.user)
+                temp.pengunjung = Pengunjung.objects.get(user = request.user)
+                form.save()
+                return redirect('/donation/')
+
+        context = {
+            'form' : form,
+            'poin' : data_pengunjung.poin
+
+        }
+        return JsonResponse(b"CREATED", status=201)
+    else:
+        return JsonResponse({
+                "status": False,
+                "message": "401 Error"
+                }, status=401)
