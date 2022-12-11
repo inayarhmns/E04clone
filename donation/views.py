@@ -45,8 +45,9 @@ def show_alltime_donation(request):
     data_alltime = DonationInfo.objects.filter(pengunjung= data_pengunjung, is_done = True)
     return HttpResponse(serializers.serialize("json", data_alltime), content_type="application/json")
 
-@csrf_exempt
+
 @login_required(login_url='../Authentication/login/<str:status>/')
+@csrf_exempt
 def selesai_donasi(request, id):
     data_pengunjung = Pengunjung.objects.get(user=request.user)
     data = DonationInfo.objects.get(pk=id)
@@ -62,6 +63,7 @@ def selesai_donasi(request, id):
     return JsonResponse(content, safe=False)
 
 @login_required(login_url='../Authentication/login/<str:status>/')
+@csrf_exempt
 def edit_donasi(request, id):
     print(id)
     if request.method == 'POST':
@@ -96,8 +98,8 @@ def show_donation(request):
     else:
         return render(request, "notauth.html")
 
-@csrf_exempt
 @login_required(login_url='../Authentication/login/<str:status>/')
+@csrf_exempt
 def edit_flutter(request, id):
     print(id)
     if request.method == 'POST':
@@ -119,8 +121,8 @@ def edit_flutter(request, id):
                 "message": "401 Error"
                 }, status=401)
 
-@csrf_exempt
 @login_required(login_url='../Authentication/login/<str:status>/')
+@csrf_exempt
 def form_flutter(request):
     if request.user.is_authenticated:
         data_pengunjung = Pengunjung.objects.get(user=request.user)
