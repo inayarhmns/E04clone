@@ -104,7 +104,10 @@ def get_pengunjung(request):
     load = {
         'first_name': first_name,
         'last_name': last_name,
-        'gender': pengunjung.jenis_kelamin
+        'gender': pengunjung.jenis_kelamin,
+        'coins': pengunjung.poin,
+        'address' : pengunjung.alamat,
+        'contact' : pengunjung.kontak,
     }
     return JsonResponse(load, safe = False)
 
