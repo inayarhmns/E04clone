@@ -7,6 +7,7 @@ from django.urls import reverse
 from donation.forms import DonationForm
 from Authentication.models import Pengunjung
 from donation.models import DonationInfo
+from django.views.decorators.csrf import csrf_exempt
 
 # TODO:implement views
 
@@ -44,6 +45,7 @@ def show_alltime_donation(request):
     data_alltime = DonationInfo.objects.filter(pengunjung= data_pengunjung, is_done = True)
     return HttpResponse(serializers.serialize("json", data_alltime), content_type="application/json")
 
+@csrf_exempt
 @login_required(login_url='../Authentication/login/<str:status>/')
 def selesai_donasi(request, id):
     data_pengunjung = Pengunjung.objects.get(user=request.user)
@@ -94,6 +96,7 @@ def show_donation(request):
     else:
         return render(request, "notauth.html")
 
+@csrf_exempt
 @login_required(login_url='../Authentication/login/<str:status>/')
 def edit_flutter(request, id):
     print(id)
@@ -116,6 +119,8 @@ def edit_flutter(request, id):
                 "message": "401 Error"
                 }, status=401)
 
+@csrf_exempt
+@login_required(login_url='../Authentication/login/<str:status>/')
 def form_flutter(request):
     if request.user.is_authenticated:
         data_pengunjung = Pengunjung.objects.get(user=request.user)
