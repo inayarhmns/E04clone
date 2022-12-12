@@ -2,6 +2,8 @@ from marketplace.forms import ShopForm
 from Authentication.models import Pengunjung
 from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
+from marketplace.models import Shop
+from django.core import serializers
 
 # Create your views here.
 def show_marketplace(request):
@@ -41,3 +43,8 @@ def beli_flutter(request):
         return JsonResponse({"status": True, "message": "Purchase has been successful!"}, status = 200)
     else:
         return JsonResponse({"status": False, "message": "401 Error"}, status = 401)
+
+def get_pembelian_flutter(request):
+    pengunjung = Pengunjung.objects.filter(user = request.user)
+    obj = Shop.objects.filter(pengunjung = pengunjung)
+    return JsonResponse(serializers.serialize("json", obj), status = 200)
