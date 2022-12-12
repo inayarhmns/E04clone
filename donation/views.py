@@ -137,17 +137,14 @@ def form_flutter(request):
                 print(request.user)
                 temp.pengunjung = Pengunjung.objects.get(user = request.user)
                 form.save()
-                return redirect('/donation/')
-
-        context = {
-            'form' : form,
-            'poin' : data_pengunjung.poin
-
-        }
-        return JsonResponse({
+                return JsonResponse({
                 "status": True,
                 "message": "Successfully added donation"
                 }, status=200)
+        return JsonResponse({
+                "status": False,
+                "message": "401 Error"
+                }, status=401)
     else:
         return JsonResponse({
                 "status": False,
