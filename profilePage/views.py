@@ -1,10 +1,11 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.core import serializers
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from Authentication.models import Pengunjung
+from django.views.decorators.csrf import csrf_exempt
 
 
 # Create your views here.
@@ -40,3 +41,25 @@ def editProfile(request):
         return HttpResponse('Edit user berhasil')
     else:
         return HttpResponseRedirect(reverse('profilePage:lihatProfile'))
+
+@csrf_exempt
+def get_profile(request):
+    user = request.user
+    context = {
+        'first_name': user.first_name.upper(),
+        'last_name': user.last_name.upper(),
+        'email': user.email.lower(),
+        'kontak': user.pengunjung.kontak,
+        'gender': True if user.pengunjung.jenis_kelamin == "LK" else False,
+        'address': user.pengunjung.alamat,
+        'poin': user.pengunjung.poin
+    }
+    return JsonResponse({
+        'first_name': user.first_name.upper(),
+        'last_name': user.last_name.upper(),
+        'email': user.email.lower(),
+        'kontak': user.pengunjung.kontak,
+        'gender': True if user.pengunjung.jenis_kelamin == "LK" else False,
+        'address': user.pengunjung.alamat,
+        'poin': user.pengunjung.poin
+    }, status=200)

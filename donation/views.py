@@ -7,6 +7,7 @@ from django.urls import reverse
 from donation.forms import DonationForm
 from Authentication.models import Pengunjung
 from donation.models import DonationInfo
+from django.views.decorators.csrf import csrf_exempt
 
 # TODO:implement views
 
@@ -44,7 +45,9 @@ def show_alltime_donation(request):
     data_alltime = DonationInfo.objects.filter(pengunjung= data_pengunjung, is_done = True)
     return HttpResponse(serializers.serialize("json", data_alltime), content_type="application/json")
 
+
 @login_required(login_url='../Authentication/login/<str:status>/')
+@csrf_exempt
 def selesai_donasi(request, id):
     data_pengunjung = Pengunjung.objects.get(user=request.user)
     data = DonationInfo.objects.get(pk=id)
@@ -60,6 +63,7 @@ def selesai_donasi(request, id):
     return JsonResponse(content, safe=False)
 
 @login_required(login_url='../Authentication/login/<str:status>/')
+@csrf_exempt
 def edit_donasi(request, id):
     print(id)
     if request.method == 'POST':
@@ -94,3 +98,61 @@ def show_donation(request):
     else:
         return render(request, "notauth.html")
 
+@login_required(login_url='../Authentication/login/<str:status>/')
+@csrf_exempt
+def edit_flutter(request, id):
+    print(id)
+    if request.method == 'POST':
+        jenis_barang = request.POST.get("jenis_barang")
+        waktu_isi = now()
+        amount = request.POST.get("amount")
+        shipping_method = request.POST.get("shipping_method")
+        data = DonationInfo.objects.get(pk=id)
+        data.jenis_barang = jenis_barang
+        data.amount = amount
+        data.waktu_isi = waktu_isi
+        data.shipping_method = shipping_method
+        data.save()
+        # print(data)
+        print(DonationInfo.objects.filter(pk=id).values())
+        return JsonResponse({
+                "status": True,
+                "message": "Successfully edited donation"
+                }, status=200)
+    return JsonResponse({
+                "status": False,
+                "message": "401 Error"
+                }, status=401)
+
+@login_required(login_url='../Authentication/login/<str:status>/')
+@csrf_exempt
+def form_flutter(request):
+    if request.user.is_authenticated:
+        data_pengunjung = Pengunjung.objects.get(user=request.user)
+        form = DonationForm()
+        if (request.method == 'POST'):
+            form = DonationForm(request.POST)
+            if form.is_valid():
+                temp = form.save(commit=False)
+                print(request.user)
+                temp.pengunjung = Pengunjung.objects.get(user = request.user)
+                form.save()
+                return JsonResponse({
+                "status": True,
+                "message": "Successfully added donation"
+                }, status=200)
+        return JsonResponse({
+                "status": False,
+                "message": "401 Error"
+                }, status=401)
+    else:
+        return JsonResponse({
+                "status": False,
+                "message": "401 Error"
+                }, status=401)
+
+@login_required(login_url='../Authentication/login/<str:status>/')
+@csrf_exempt
+def get_current_donation(request, id):
+    data = DonationInfo.objects.filter(pk=id)
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")

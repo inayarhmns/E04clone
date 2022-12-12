@@ -34,7 +34,7 @@ def create_question(request):
             return JsonResponse(data)
 
 @csrf_exempt
-def answer(request):
+def json(request):
     if request.method == "POST":
         data = json.loads(request.body)
         question_answer = Faq(question = data['question'], answer = "")

@@ -11,6 +11,10 @@ urlpatterns = [
     path('history/', show_alltime_donation, name='show_alltime_donation'),
     path('done/<int:id>', selesai_donasi, name='done'),
     path('edit/<int:id>', edit_donasi, name='edit'),
+    path('edit_flutter/<int:id>', edit_flutter, name='edit_flutter'),
+    path('form_flutter/', form_flutter, name='form_flutter'),
+    path('current/<int:id>', get_current_donation, name='current'),
+
 
 
 

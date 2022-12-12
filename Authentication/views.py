@@ -104,7 +104,10 @@ def get_pengunjung(request):
     load = {
         'first_name': first_name,
         'last_name': last_name,
-        'gender': pengunjung.jenis_kelamin
+        'gender': pengunjung.jenis_kelamin,
+        'coins': pengunjung.poin,
+        'address' : pengunjung.alamat,
+        'contact' : pengunjung.kontak,
     }
     return JsonResponse(load, safe = False)
 
@@ -117,8 +120,6 @@ def login_flutter(request):
         user = authenticate(request, username = temp.get_username(), password = password)
         if user is not None:
             login(request, user)
-            response = HttpResponse('Login Success')
-            response.set_cookie('last_login', str(datetime.datetime.now()))
             return JsonResponse({
                "status": True,
                "message": "Successfully Logged In!"
@@ -134,3 +135,59 @@ def login_flutter(request):
            "status": False,
            "message": "Failed to Login, check your email/password."
          }, status=401)
+
+@csrf_exempt
+def logout_flutter(request):
+    logout(request)
+    return JsonResponse({
+        "status": True,
+        "message": "Successfully Logged Out!"
+        # Insert any extra data if you want to pass data to Flutter
+        }, status=200)
+
+@csrf_exempt
+def register_flutter(request):
+    if request.method == "POST":
+        auth = ProfileForm({
+                    'username':request.POST.get('username'),
+                    'first_name':request.POST.get('first_name').upper(),
+                    'last_name':request.POST.get('last_name').upper(),
+                    'email':request.POST.get('email'),
+                    'password1':request.POST.get('password1'),
+                    'password2':request.POST.get('password2')
+                })  
+
+        if auth.is_valid():
+            user = auth.save(commit = False)
+            user.set_password(request.POST.get('password1'))
+            non_auth = NonAuthForm({
+                'jenis_kelamin':request.POST.get('jenis_kelamin'),
+                'kontak':request.POST.get('kontak'),
+                'alamat':request.POST.get('alamat')
+            })
+            if non_auth.is_valid():
+                profile = non_auth.save(commit = False)
+                profile.user = user
+                user.save()
+                profile.save()
+                return JsonResponse({
+                "status": True,
+                "message": "Account has successfully created !"
+                }, status=200)
+            else:
+                one = list(non_auth.errors.values())[0]
+                return JsonResponse({
+                "status": False,
+                "message": one
+                }, status=401)
+        else:
+            one = list(auth.errors.values())[0]
+            return JsonResponse({
+                "status": False,
+                "message": one
+                }, status=401)
+    else:
+        return JsonResponse({
+                "status": False,
+                "message": "401 Error"
+                }, status=401)
