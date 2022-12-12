@@ -40,4 +40,4 @@ def beli_flutter(request):
         obj.save()
         return JsonResponse({"status": True, "message": "Purchase has been successful!"}, status = 200)
     else:
-        return JsonResponse({"status": False, "message": "Purchase Failed"}, status = 200)
+        return JsonResponse({"status": False, "message": "401 Error"}, status = 401)
