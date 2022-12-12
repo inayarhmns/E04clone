@@ -13,6 +13,7 @@ urlpatterns = [
     path('edit/<int:id>', edit_donasi, name='edit'),
     path('edit_flutter/<int:id>', edit_flutter, name='edit_flutter'),
     path('form_flutter/', form_flutter, name='form_flutter'),
+    path('current/', get_current_donation, name='current'),
 
 
 

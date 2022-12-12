@@ -153,3 +153,9 @@ def form_flutter(request):
                 "status": False,
                 "message": "401 Error"
                 }, status=401)
+
+@login_required(login_url='../Authentication/login/<str:status>/')
+@csrf_exempt
+def get_current_donation(request, id):
+    data = DonationInfo.objects.filter(pk=id)
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
