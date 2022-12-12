@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.http import HttpResponse, JsonResponse
 from marketplace.models import Shop
 from django.core import serializers
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 def show_marketplace(request):
@@ -29,6 +30,7 @@ def form_marketplace(request):
     context = {"form": form}
     return render(request, "marketplaceform.html", context)
 
+@csrf_exempt
 def beli_flutter(request):
     if request.method == "POST":
         form = ShopForm({
