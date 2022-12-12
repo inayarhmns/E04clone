@@ -37,12 +37,15 @@ def beli_flutter(request):
             "size": request.POST.get('size'),
             "payment_method": request.POST.get('payment_method'),
             "shipping_method": request.POST.get('shipping_method')
-            })   
-        obj = form.save(commit = False)
-        obj.nama_baju = request.POST.get('nama_baju')
-        obj.pengunjung = Pengunjung.objects.get(user = request.user)
-        obj.save()
-        return JsonResponse({"status": True, "message": "Purchase has been successful!"}, status = 200)
+            })
+        if (form.is_valid()):
+            obj = form.save(commit = False)
+            obj.nama_baju = request.POST.get('nama_baju')
+            obj.pengunjung = Pengunjung.objects.get(user = request.user)
+            obj.save()
+            return JsonResponse({"status": True, "message": "Purchase has been successful!"}, status = 200)
+        else:
+            return JsonResponse({"status": False, "message": "Purchase failed"}, status = 401)
     else:
         return JsonResponse({"status": False, "message": "401 Error"}, status = 401)
 
