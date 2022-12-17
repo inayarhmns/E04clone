@@ -5,6 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from Authentication.models import Pengunjung
+from django.views.decorators.csrf import csrf_exempt
 
 
 # Create your views here.
@@ -61,3 +62,29 @@ def get_profile(request):
         'address': user.pengunjung.alamat,
         'poin': user.pengunjung.poin
     }, status=200)
+
+@login_required(login_url='../Authentication/login/<str:status>/')
+@csrf_exempt
+def edit_flutter(request):
+    if request.method == 'POST':
+        user = request.user
+        pengunjung = Pengunjung.objects.get(user = request.user)
+        user.first_name = request.POST.get('first_name')
+        user.last_name = request.POST.get('last_name')
+        pengunjung.kontak = request.POST.get('kontak')
+        if request.POST.get('gender') == 'LK':
+            pengunjung.jenis_kelamin = Pengunjung.JenisKelamin.laki_laki
+        else:
+            pengunjung.jenis_kelamin = Pengunjung.JenisKelamin.perempuan
+        pengunjung.alamat = request.POST.get('address')
+        user.save()
+        pengunjung.save()
+        return JsonResponse({
+                "status": True,
+                "message": "Successfully added donation"
+                }, status=200)
+    else:
+        return JsonResponse({
+                "status": False,
+                "message": "401 Error"
+                }, status=401)
