@@ -15,10 +15,7 @@ def index(request):
         'faqs': faqs,
         'form': form
     }
-    if request.user.is_authenticated:
-        return render(request, 'faq_loggedin.html', response)
-    else:
-        return render(request, 'faq.html', response)
+    return render(request, 'faq.html', response)
 
 def create_question(request):
     data = dict()
@@ -37,7 +34,7 @@ def create_question(request):
             return JsonResponse(data)
 
 @csrf_exempt
-def answer(request):
+def json(request):
     if request.method == "POST":
         data = json.loads(request.body)
         question_answer = Faq(question = data['question'], answer = "")

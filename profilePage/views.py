@@ -42,6 +42,7 @@ def editProfile(request):
     else:
         return HttpResponseRedirect(reverse('profilePage:lihatProfile'))
 
+@csrf_exempt
 def get_profile(request):
     user = request.user
     context = {
